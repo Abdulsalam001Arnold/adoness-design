@@ -1,244 +1,148 @@
-# 🚀 AGENTS.md - Adoness AI Development Guidelines
+# Adoness Design — Project Briefing
 
-## 🎯 Project Overview
+## What This Project Is
+A fashion designer's portfolio and showcase website for a client named Adoness. The site displays collections, categories, and new arrivals, and includes a chatbot powered by an n8n agent. The goal is a premium, elegant, modern fashion brand experience.
 
-**Adoness** is a next-generation AI-powered content generation platform designed to help users create high-quality, engaging content effortlessly. The platform features a modular architecture with distinct AI agents for different content types, a robust content management system, and a seamless user experience.
+## Tech Stack
+- **Framework:** Next.js 14+ (App Router)
+- **Styling:** Tailwind CSS
+- **Language:** TypeScript (strict — no `any` types ever)
+- **Animation:** GSAP (used selectively where motion adds value — entrances, reveals, hover effects)
+- **HTTP Client:** Axios (used for chatbot API calls to n8n webhook)
+- **Design Reference:** Figma exports and screenshots provided in /design folder
 
-## 🛠️ Technology Stack
+---
 
-### Frontend
-- **Framework**: Next.js 14 (App Router)
-- **Language**: TypeScript
-- **Styling**: Tailwind CSS
-- **UI Components**: Shadcn/UI
-- **State Management**: TanStack Query (React Query)
-- **Forms**: React Hook Form + Zod
-- **Authentication**: NextAuth.js
-- **Database**: PostgreSQL (via Prisma)
-- **Deployment**: Vercel
+## Brand Identity (Follow This Exactly)
 
-### Backend
-- **Framework**: Next.js API Routes
-- **Language**: TypeScript
-- **Database**: PostgreSQL
-- **ORM**: Prisma
-- **Authentication**: NextAuth.js
-- **Deployment**: Vercel
+### Colours
+Extracted from the approved design mockup:
 
-### AI Agents
-- **Core Framework**: LangChain.js
-- **LLMs**: OpenAI (GPT-4o, GPT-3.5-turbo)
-- **Vector Stores**: Pinecone
-- **Embedding Models**: OpenAI Embeddings
-- **Tools**: Custom tools for content generation, image creation, and data processing
+| Token | Value | Usage |
+|-------|-------|-------|
+| `background` | `#FAF6F1` | Page background (warm off-white/cream) |
+| `foreground` | `#111111` | Primary text, headings |
+| `muted` | `#C8C0B8` | Subtle dot patterns, borders, secondary text |
+| `accent` | `#A0866A` | Warm tan/sand — hover states, highlights |
+| `surface` | `#FFFFFF` | Cards, image containers |
+| `btn-primary-bg` | `#111111` | Primary button background |
+| `btn-primary-text` | `#FFFFFF` | Primary button text |
 
-## 📂 Project Structure
-
-```
-adoness/
-├── app/                    # Next.js App Router pages
-│   ├── api/                # API routes
-│   ├── dashboard/          # Dashboard pages
-│   ├── auth/               # Authentication pages
-│   ├── templates/          # Template pages
-│   └── ...
-├── components/             # React components
-│   ├── ui/                 # Reusable UI components (Shadcn)
-│   ├── dashboard/          # Dashboard-specific components
-│   ├── templates/          # Template components
-│   └── ...
-├── lib/                    # Utility functions and helpers
-│   ├── agents/             # AI agent implementations
-│   ├── db/                 # Database utilities
-│   ├── auth/               # Authentication helpers
-│   ├── utils/              # General utilities
-│   └── ...
-├── prisma/                 # Prisma schema and migrations
-├── public/                 # Static assets
-├── scripts/                # Automation scripts
-├── .env.local              # Environment variables
-├── next.config.ts          # Next.js configuration
-├── tailwind.config.ts      # Tailwind CSS configuration
-└── tsconfig.json           # TypeScript configuration
-```
-
-## 🧩 AI Agent Architecture
-
-### Agent Types
-
-| Agent Type | Purpose | Key Features |
-|------------|---------|--------------|
-| **Blog Agent** | Generates long-form blog posts | SEO optimization, tone control, outline generation |
-| **Social Media Agent** | Creates social media content | Platform-specific formatting, hashtag generation |
-| **Email Agent** | Writes marketing and sales emails | Subject line optimization, CTA generation |
-| **Ad Copy Agent** | Generates ad copy | A/B testing variations, platform targeting |
-| **Image Agent** | Creates AI-generated images | Style control, aspect ratio options |
-| **Video Script Agent** | Generates video scripts | Scene breakdown, voiceover text |
-
-### Agent Workflow
-
-1. **Input Processing**: User provides topic, keywords, and preferences
-2. **Outline Generation**: Agent creates a structured outline
-3. **Content Generation**: Agent generates content based on outline
-4. **Review & Refine**: User reviews and requests revisions
-5. **Final Output**: Approved content is saved to database
-
-## 🎨 Design System
-
-### Color Palette
-
-| Color | Usage | CSS Variable |
-|-------|-------|--------------|
-| **Primary** | Main CTAs, active states | `--primary` |
-| **Secondary** | Secondary actions | `--secondary` |
-| **Accent** | Highlights, badges | `--accent` |
-| **Background** | Page backgrounds | `--background` |
-| **Card** | Card backgrounds | `--card` |
-| **Text** | Primary text | `--foreground` |
-| **Muted** | Secondary text | `--muted` |
+Define all of these as CSS variables in `globals.css` and reference them via Tailwind config. Never hardcode raw hex values in components.
 
 ### Typography
+- **Headings (h1–h3):** Large, bold serif — use `font-serif` or a Google Font like `Playfair Display` or `DM Serif Display`
+- **Body / UI text:** Clean, modern sans-serif — use `font-sans` with `Inter` or `DM Sans`
+- **Labels / nav / buttons:** Uppercase tracking-widest for small caps feel (as seen in mockup nav)
+- Font sizes should be generous — this is a fashion brand, whitespace and type scale matter
 
-- **Headings**: Inter, 600-800 weight
-- **Body Text**: Inter, 400-500 weight
-- **Code**: JetBrains Mono
+---
 
-### Spacing
-
-- Use Tailwind spacing utilities (e.g., `p-4`, `m-2`, `gap-4`)
-- Maintain consistent spacing between elements
-- Use `gap-*` utilities for flex/grid layouts
-
-### Border Radius
-
-- **Default**: `rounded-lg`
-- **Buttons**: `rounded-md`
-- **Cards**: `rounded-xl`
-- **Input Fields**: `rounded-md`
-
-## 🔐 Authentication
-
-### Authentication Flow
-
-1. **Sign Up**: User provides email and password
-2. **Verification**: Email verification (optional)
-3. **Login**: User logs in with credentials
-4. **Session Management**: NextAuth.js handles sessions
-5. **Protected Routes**: Middleware protects authenticated routes
-
-### Environment Variables
-
-```env
-# NextAuth.js
-NEXTAUTH_SECRET=your-secret-key
-NEXTAUTH_URL=http://localhost:3000
-
-# Database
-DATABASE_URL=postgresql://user:password@host:port/database
-
-# OpenAI
-OPENAI_API_KEY=your-openai-key
-
-# Pinecone
-PINECONE_API_KEY=your-pinecone-key
-PINECONE_INDEX_NAME=your-index-name
-PINECONE_ENVIRONMENT=your-environment
+## Folder Structure
+```
+src/
+  app/                    → Next.js App Router pages
+    page.tsx              → Home
+    about/page.tsx
+    collections/page.tsx
+    category/page.tsx
+    new-arrivals/page.tsx
+    contact/page.tsx
+    item/[slug]/page.tsx  → Single product/item detail page
+    layout.tsx            → Root layout with Navbar + Footer + Chatbot
+  components/
+    ui/                   → Reusable primitives (Button, Badge, Card, etc.)
+    layout/               → Navbar, Footer
+    sections/             → Page-level sections (Hero, CollectionGrid, etc.)
+    chatbot/              → Chatbot modal component
+  lib/
+    axios.ts              → Axios instance with base URL configured
+    chatbot.ts            → Chatbot API call helper
+    gsap/                 → GSAP animation utilities and hooks
+  hooks/                  → Custom React hooks
+  types/                  → TypeScript interfaces and types
+  styles/
+    globals.css           → CSS variables, base styles
+design/                   → Figma exports, screenshots, reference images (DO NOT modify)
 ```
 
-## 💾 Database
+---
 
-### Prisma Schema
+## Pages Overview
 
-```prisma
-model User {
-  id        String   @id @default(cuid())
-  email     String   @unique
-  name      String?
-  image     String?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  contents  Content[]
-}
+| Page | Route | Purpose |
+|------|-------|---------|
+| Home | `/` | Hero section, featured collections, brand intro, image grid |
+| Collections | `/collections` | Full collections/lookbook grid |
+| Category | `/category` | Filter view by clothing type |
+| New Arrivals | `/new-arrivals` | Latest pieces highlighted |
+| About | `/about` | Designer story, vision, process |
+| Contact | `/contact` | Booking, enquiries, social links |
+| Item Detail | `/item/[slug]` | Single piece detail view |
 
-model Content {
-  id          String   @id @default(cuid())
-  userId      String
-  user        User     @relation(fields: [userId], references: [id])
-  title       String
-  type        ContentType
-  content     Json
-  status      ContentStatus @default(DRAFT)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-}
+---
 
-enum ContentType {
-  BLOG
-  SOCIAL_MEDIA
-  EMAIL
-  AD_COPY
-  IMAGE
-  VIDEO_SCRIPT
-}
+## Design System Rules
 
-enum ContentStatus {
-  DRAFT
-  PUBLISHED
-  ARCHIVED
-}
-```
+- **Always use server components by default.** Add `"use client"` only when the component uses hooks, browser APIs, or GSAP animations.
+- **Spacing:** Use generous padding and margin. Fashion sites breathe — don't compress content.
+- **Images:** Always use `next/image` with proper `alt` text. Use `object-cover` for fashion photography.
+- **Responsive:** Mobile-first. Every component must look correct at 375px, 768px, and 1280px+.
+- **Rounded corners:** Soft `rounded-2xl` or `rounded-3xl` for cards and image containers, matching the mockup aesthetic.
+- **Dot pattern background:** The subtle dot grid on the hero is a CSS background-image pattern — replicate it in globals.css.
 
-### Database Commands
+---
 
-```bash
-# Generate Prisma client
-cd prisma
-npx prisma generate
+## GSAP Animation Rules
+- Only animate elements that benefit from motion (hero text reveal, image stagger, section entrances)
+- All GSAP code goes inside `useEffect` with proper cleanup (`return () => { tl.kill() }`)
+- Use `ScrollTrigger` for scroll-based reveals
+- Never animate layout-breaking properties — stick to `opacity`, `y`, `scale`, `x`
+- Keep animations subtle and elegant — this is fashion, not a game site
 
-# Apply migrations
-npx prisma migrate dev --name init
+---
 
-# Reset database
-npx prisma migrate reset
-
-# View database
-npx prisma studio
-```
-
-## 🤖 AI Agent Development
-
-### Creating a New Agent
-
-1. **Create Agent File**: Create a new file in `lib/agents/`
-2. **Define Tools**: Create necessary tools in `lib/agents/tools/`
-3. **Implement Agent**: Use LangChain.js to create the agent
-4. **Add to Registry**: Register the agent in `lib/agents/index.ts`
-5. **Create UI**: Build corresponding UI components in `components/templates/`
-
-### Agent Implementation Example
-
-```typescript
-// lib/agents/blog-agent.ts
-import { AgentExecutor, createReactAgent } from "langchain/agents";
-import { ChatOpenAI } from "@langchain/openai";
-import { BlogOutlineTool, BlogContentTool } from "./tools/blog-tools";
-
-export async function createBlogAgent() {
-  const model = new ChatOpenAI({ model: "gpt-4o", temperature: 0.7 });
-  
-  const tools = [
-    new BlogOutlineTool(),
-    new BlogContentTool(),
-  ];
-  
-  const agent = createReactAgent({ model, tools });
-  
-  return new AgentExecutor({ agent, tools });
+## Chatbot Integration
+- The chatbot connects to an **n8n webhook** via Axios POST
+- Axios instance is configured in `/lib/axios.ts` with the base URL from `.env.local`
+- Session ID is generated once per page load and passed with every message
+- Request body shape:
+```json
+{
+  "action": "sendMessage",
+  "sessionId": "string",
+  "chatInput": "string"
 }
 ```
+- Response: parse `data.output` first, fallback to `data.text`, `data.response`, `data.message`
+- The chatbot component floats fixed bottom-right, same pattern as the portfolio site
+- Environment variable: `NEXT_PUBLIC_CHATBOT_WEBHOOK_URL`
 
-### Tool Development
+---
 
-```typescript
-// lib/agents/tools/blog-tools.ts
-import { BaseTool } from "@langchain/core/tools";
+## Coding Conventions
+- **TypeScript:** Strict mode. Every prop, function param, and return type must be typed. No `any`.
+- **Components:** Functional only. Named exports for all components.
+- **Imports:** Use `@/` path alias for all internal imports
+- **CSS:** Tailwind utility classes only. No inline styles. No separate CSS modules unless absolutely necessary.
+- **Error handling:** All Axios calls wrapped in try/catch. Always handle loading and error states in UI.
+- **No magic numbers:** Use Tailwind spacing scale. If a custom value is needed, define it in tailwind.config.
+
+---
+
+## Environment Variables
+```
+NEXT_PUBLIC_CHATBOT_WEBHOOK_URL=   ← n8n webhook URL for chatbot
+```
+Never hardcode URLs. Always read from `process.env`.
+
+---
+
+## What Claude Should Do When Working on This Project
+- **Read** the design files in `/design` before building any new page or section
+- **Follow the brand identity exactly** — colours, fonts, spacing must match the mockup
+- **Write full TypeScript** — no shortcuts, no implicit types
+- **Run the dev server mentally** — before finishing a task, consider if there are missing imports, type errors, or broken layouts
+- **Preserve existing structure** — do not reorganise folders unless asked
+- **Comment non-obvious code** — especially GSAP timelines and animation logic
+- **Never touch .env files** — only reference env variables, never create or overwrite .env
