@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Easeon - Transform Your Style</title>
+<!-- Tailwind CSS v3 CDN -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brandBackground: '#FAF6F1',
+            brandDark: '#111111',
+          },
+          fontFamily: {
+            serif: ['Georgia', 'serif'],
+            sans: ['Inter', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+<style data-purpose="custom-styling">
+    /* Subtle dot pattern background as seen in reference image */
+    .dot-pattern {
+      background-image: radial-gradient(#d1d5db 1px, transparent 1px);
+      background-size: 40px 40px;
+      background-position: 0 0;
+    }
+
+    /* Vertical line style for the 'hanging' images effect */
+    .hanging-line {
+      width: 1px;
+      background-color: #e5e7eb;
+      position: absolute;
+      top: -100px;
+      left: 50%;
+      height: 100px;
+      z-index: 0;
+    }
+
+    /* Animation for floating appearance */
+    .float-card {
+      transition: transform 0.3s ease;
+    }
+    .float-card:hover {
+      transform: translateY(-10px);
+    }
+  </style>
+</head>
+<body class="bg-[#E2D9CF] min-h-screen flex items-center justify-center p-4 md:p-8 font-sans antialiased text-brandDark">
+<!-- BEGIN: MainContainer -->
+<main class="w-full max-w-[1440px] bg-brandBackground rounded-[40px] overflow-hidden shadow-2xl relative min-h-[90vh] flex flex-col">
+<!-- Background Texture -->
+<div class="absolute inset-0 dot-pattern opacity-40 pointer-events-none"></div>
+<!-- BEGIN: Navigation -->
+<nav class="relative z-10 flex items-center justify-between px-8 py-6 md:px-12">
+<div class="text-2xl font-bold tracking-tight" data-purpose="logo">
+        Easeon
+      </div>
+<div class="hidden md:flex items-center space-x-8 text-xs font-semibold tracking-widest uppercase">
+<a class="hover:opacity-60 transition-opacity" href="#">Collection</a>
+<a class="hover:opacity-60 transition-opacity" href="#">Category</a>
+<a class="hover:opacity-60 transition-opacity" href="#">New Arrival</a>
+<a class="hover:opacity-60 transition-opacity" href="#">Contact</a>
+</div>
+<div class="flex items-center space-x-4">
+<button class="p-2 hover:bg-black/5 rounded-full transition-colors">
+<svg fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><circle cx="11" cy="11" r="8"></circle><line x1="21" x2="16.65" y1="21" y2="16.65"></line></svg>
+</button>
+<button class="p-2 hover:bg-black/5 rounded-full transition-colors">
+<svg fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"></path><line x1="3" x2="21" y1="6" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+</button>
+</div>
+</nav>
+<!-- END: Navigation -->
+<!-- BEGIN: HeroSection -->
+<section class="relative z-10 flex-grow flex flex-col items-center text-center px-6 pt-12 pb-32">
+<!-- Eyebrow Label -->
+<span class="text-[10px] md:text-[11px] font-bold tracking-[0.2em] uppercase text-gray-500 mb-6 bg-brandDark/5 px-4 py-1 rounded-full">
+        Choose Your Fashion Style
+      </span>
+<!-- Main Heading -->
+<h1 class="max-w-4xl text-4xl md:text-6xl font-medium leading-[1.1] mb-6 font-serif">
+        Transform your style, making <br class="hidden md:block"/> everyday extraordinary.
+      </h1>
+<!-- Subtext -->
+<p class="max-w-xl text-sm md:text-base text-gray-600 mb-10 leading-relaxed">
+        Explore a handpicked collection of pieces, where <br class="hidden md:inline"/> timeless elegance meets effortless modern flair.
+      </p>
+<!-- CTA Button -->
+<button class="bg-brandDark text-white px-10 py-3.5 rounded-full text-xs font-bold tracking-widest uppercase hover:opacity-90 transition-opacity">
+        Get Started
+      </button>
+<!-- BEGIN: StaggeredImageGrid -->
+<div class="mt-20 w-full max-w-7xl mx-auto grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-4 px-4 items-end">
+<!-- Column 1 -->
+<div class="flex flex-col gap-4">
+<div class="relative float-card">
+<div class="hanging-line"></div>
+<img alt="Fashion 1" class="rounded-2xl w-full aspect-[3/4] object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDoM4wu31vhh7Vom3gx5PjhsnOfUWdlyrLGPbe2vw72sqnM1ASWuMJwRnXJkU6bB0z7zSYYjae2Jce6HVSCOzOgDgSo51l0YU6dRZI4w4gKkuS4dIqkAYzKtVRHjoh4Oxch1MKjUgRfIRBot616sr08ZQQCR8XXEWRKsymMsyfcxAzXVU_nEDR_RLIi5yQMpqiHRskGke3mil3xF0x44-nW6yXyJyyENbXM-LMCa-wzwZLgzegiTSICyTahv4GEKvlxLsHGt1fDETgi"/>
+</div>
+<div class="relative float-card">
+<img alt="Fashion 2" class="rounded-2xl w-full aspect-[3/4.5] object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBmg6NsYKUlkqVhVZWSUWnRszk9_A6Q-OOg2tw2jHKKYRTMSsCWIW8TzdQobcvRBu7vopQiHV47EOOQ9zamtiPmCXiXkNN2sm23HONDB_yUe3x3HgYWUqjhcjexVhqGqZgzX8t1SGLzkd8J5rTvzK_PpaTCOGQhM7ujnGQr0PoEEAcinZCJR1fVFQYygEl311w9caXyDohFTVt6bREgak1FllJ_HIBS4xxWGCIHTjlRImEmLhZ39RZ0-u3N7jAwM2dN51tn8R0WP1Nv"/>
+</div>
+</div>
+<!-- Column 2 -->
+<div class="relative float-card lg:pb-12">
+<div class="hanging-line"></div>
+<img alt="Fashion 3" class="rounded-2xl w-full aspect-[3/5] object-cover bg-brandBackground" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBps_Aco84eNVQtn2ZCqcUQazVzKcOVdzYWAoVaRv65CydvvXTF1AaBm6_SsifWks33FM3fPPsb0Dbj0q-ih91f3OU3Gtj58SZILl2uwHOV4pHzeHTrexXtEeLNpRcs8ikEoRyoRe4bXbSdV-apz6HrJ3jwKK50LXql4WoPhewFUk7-j6aX4yPZBwiFPnKYtbTDrIZy5kRAAHnhTujZCTwPwBwaIScssKk_Fl05UF4Vh5C43DLtq0IPWwrDiJG639z7kWxXeYvQVhMm"/>
+</div>
+<!-- Column 3 -->
+<div class="relative float-card pt-16">
+<div class="hanging-line"></div>
+<img alt="Fashion 4" class="rounded-2xl w-full aspect-[3/4.2] object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC4trYrdSW3hsNkymGvSWgt83h2KQwvJf_-aaerW7z-szMMWxK5a5_4nWa0V4VBaGZ9dr2D05wnjYNyWaXiyqCdBA2yLrsu-ru-LULDsGVlb-Kw6GydbG-M2Ymc35O6DAlYqgbXTC-DkfLYuA4ZfoarJsU-vUfKQQDoz4iieOlpYaLSxWBS4-ouZ3iwgFvrURmo-SGsAUfAxkvcPKmcEt3WOFcbcJs5YWkEcyZZpVnDxHsSywGSZQLfFEN4xDu-akcfrVSx3CmtiCQ8"/>
+</div>
+<!-- Column 4 -->
+<div class="relative float-card lg:pb-8">
+<div class="hanging-line"></div>
+<img alt="Fashion 5" class="rounded-2xl w-full aspect-[3/4.8] object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCEt5OTUF4hE2efxJDuLPjE3hKFZTs1G_OSlBgDeOQiyCPxgt-RvNPShXt1WzU--T4LhKavRJhUS_tSAO4Y6TaVc-V6Wux0RxOm2uSKMe7LutIpfxGjmpK-bWmtSZz0lxayGraxHqlv4dVsL-KZPQzmu--jEGEoEYRkaHbHyPLhPi7sB2Wd8r_WmU8rsK2fXuXsOO5RJ14NmCio-B9W-0vhZ5nwjQSH8-UZjoIUWEuXE84GH2zRshUUGgwKACmpszfOTeBxqcTCAwFa"/>
+</div>
+<!-- Column 5 -->
+<div class="relative float-card pt-24">
+<div class="hanging-line"></div>
+<img alt="Fashion 6" class="rounded-2xl w-full aspect-[3/4.4] object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDsi4ouCEYD6eVseZm3z9KrlauDnCxWfxXD2ZDGg9wK-f1NhbiHsv63fnsQwITUzJGzTtW4MIXx5kdH3MeNJMH1dDurSJawYETAZ6HzP1oRxWITahiq-tPyWVt_EEnBkr1D-B9RDpdZ8_v_Dv7DEowyxkgWufd8EnWqnoqR1KEtIV884XFNnPqrFJAKlewFHc-t7JobnGUAMZx75R0f87n6fpD6X8r3a5ScbGOex2OxEjeK47TZC_OLJMLGaQoMU1CFm7qPdr7vKAZ6"/>
+</div>
+<!-- Column 6 -->
+<div class="relative float-card lg:pb-4">
+<div class="hanging-line"></div>
+<img alt="Fashion 7" class="rounded-2xl w-full aspect-[3/4.6] object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDJmE19slZESEv9erBU0AK--MiriVpE224aE81ke9st5kg8JxWpPMSMl_KZ_spOfaH1D9vTwp0u0IbCoeAEk09Ty1r8pLOIyaMlTYwDHQzPGTJM2MoVDs8lCK9bpOTrjhx_6uwguauqeZzdRrPIYu2gMKsdrBYBgfTAlcknhTNA55FMTmP13p2vbFTdnI197h2WUWua87lFYLFxs9iXt6VL2S4Cb161avAA6l5BpnCqgvXm8YD1y24yvoz0_dKTWqh0aqDJXDg5VtDI"/>
+</div>
+<!-- Column 7 -->
+<div class="flex flex-col gap-4">
+<div class="relative float-card">
+<div class="hanging-line"></div>
+<img alt="Fashion 8" class="rounded-2xl w-full aspect-[3/4.2] object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAtVT-_mdCaRLi7iu4sMxgPAk22DGjgobnsf9TTi8Isa8lup2zUDtIgyNgZzo-Gbh6ErPqVz1bQcBMYulWORONSC4p5JwMZNbq1je2nB_UEUGWla2qCK1D3BbMiE7Sw38jP-5OrnDlQ4plZhliGMrjR3XxcLuZLH_TPBV_Hsup8EImBfyBySVb_njtQq8EAoPFcAJL3jURUwBjhZOj2ZOOxPTS86bUSSjLpG8udBdDwlLXVy0ZHZ7Gy3KVDKMdOZ7N7meIiEZIfEWPK"/>
+</div>
+<div class="relative float-card">
+<img alt="Fashion 9" class="rounded-2xl w-full aspect-[3/4] object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAPC5XdKhiGQ_-ydWIkg03vq6GvIzM0C6Ubm_ifpYJ-yZRErtIuJ2Vc18oaOIkAceB2ubymN1SaoUS3TSg3_K3b0q8Hdlxa9Nqiv0WaYcMVkczFzdR-yv9xpHtfGuEe4BPATzjcJGh4F1Lgn3cj96b-fF5siHlrWIsZ09XXhRyBgCKPzGp9LDyutFwzvW87rTXQ_GiVn2573R9EBKHJyU4L_ueGk_KFqFZjQMOuSEqG42HWPxmBEx_sJiA2CwUM9b9JgZmODUOTSEW7"/>
+</div>
+</div>
+<!-- Column 8 (Last column in grid) -->
+<div class="relative float-card lg:pb-16 hidden lg:block">
+<div class="hanging-line"></div>
+<img alt="Fashion 10" class="rounded-2xl w-full aspect-[3/5.2] object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCTSyWnpY1Gh1QU61z9cUifFBco1lOugEmFEdiQsCesx0_hCNcLchKTnIoAN7Pw1DU1hX9BxYYFfZ9JHtcXetxfZfQ9iDmPElXNX5G76HLVuD1Y33dkOn4__8mXgBPNFDOd-hhmv9eBe7u7TXG055x_RN6PLALslmkrjIOehGDNOvrScOLKFKJFmz_w-5brFmOKoTH33SP5dtXDs2nExiPuQJpLuoRT2ExaYrrJ6KAhvYScTo2NaRKF7R8cNzWoohKX3huHzdJF39F7"/>
+</div>
+</div>
+<!-- END: StaggeredImageGrid -->
+</section>
+<!-- END: HeroSection -->
+</main>
+<!-- END: MainContainer -->
+</body></html><!-- MISSING_IMAGES:
+- Individual portrait images from the reference grid are not provided as separate URLs, using standard placeholders.
+-->

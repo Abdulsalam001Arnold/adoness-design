@@ -45,8 +45,10 @@ src/
     page.tsx              → Home
     about/page.tsx
     collections/page.tsx
+    admin/
+        post/page.tsx           → Upload form (client component)
     category/page.tsx
-    new-arrivals/page.tsx
+    new-arrivals/page.tsx      → Fetches and displays items (server component)
     contact/page.tsx
     item/[slug]/page.tsx  → Single product/item detail page
     layout.tsx            → Root layout with Navbar + Footer + Chatbot
@@ -54,13 +56,19 @@ src/
     ui/                   → Reusable primitives (Button, Badge, Card, etc.)
     layout/               → Navbar, Footer
     sections/             → Page-level sections (Hero, CollectionGrid, etc.)
+      ArrivalCard.tsx         → Card component for each new arrival item
     chatbot/              → Chatbot modal component
+    admin/
+        PostForm.tsx            → The upload form component
   lib/
     axios.ts              → Axios instance with base URL configured
     chatbot.ts            → Chatbot API call helper
+    supabase.ts               → Supabase client instance
+    cloudinary.ts             → Cloudinary upload helper (if used)
     gsap/                 → GSAP animation utilities and hooks
   hooks/                  → Custom React hooks
   types/                  → TypeScript interfaces and types
+    arrival.ts                → TypeScript interface for ArrivalItem
   styles/
     globals.css           → CSS variables, base styles
 design/                   → Figma exports, screenshots, reference images (DO NOT modify)
@@ -79,6 +87,7 @@ design/                   → Figma exports, screenshots, reference images (DO N
 | About | `/about` | Designer story, vision, process |
 | Contact | `/contact` | Booking, enquiries, social links |
 | Item Detail | `/item/[slug]` | Single piece detail view |
+| Admin — Post Arrival | `/admin/post` | Client-facing form to post new arrivals |
 
 ---
 
@@ -146,3 +155,69 @@ Never hardcode URLs. Always read from `process.env`.
 - **Preserve existing structure** — do not reorganise folders unless asked
 - **Comment non-obvious code** — especially GSAP timelines and animation logic
 - **Never touch .env files** — only reference env variables, never create or overwrite .env
+
+## Admin — New Arrivals Post Route
+
+### Purpose
+A simple password-protected page at `/admin/post` where the client 
+(Adoness) can upload new clothing items that automatically appear 
+on the New Arrivals page.
+
+### Route
+`/admin/post` — protected by a simple password check via middleware
+or a hardcoded env-based PIN (no full auth system needed)
+
+### Form Fields
+- `title` — text input (item name, required)
+- `category` — dropdown select:
+  (Dresses, Outerwear, Tops, Bottoms, Accessories, Other)
+- `images` — multi-image upload (min 1, max 5 images per item)
+- `description` — optional textarea
+- `submit` button — pill shape, dark fill, matches brand
+
+### How It Works
+1. Client fills the form and submits
+2. Images are uploaded to a storage bucket 
+   (use Cloudinary or Supabase Storage — store the URL)
+3. Item data (title, category, image URLs, timestamp) is saved 
+   to a database (Supabase recommended — simple, free tier)
+4. New Arrivals page (`/new-arrivals`) fetches items from the 
+   database sorted by timestamp descending (latest first)
+5. Each item renders as a branded card matching the site aesthetic
+
+
+### ArrivalItem Type
+```typescript
+interface ArrivalItem {
+  id: string
+  uuid: string
+  title: string
+  category: string
+  images: string[]
+  description?: string
+  created_at: string
+}
+```
+
+### Rules
+- Admin page must be protected — unauthenticated users redirected away
+- Images must be compressed before upload (use browser-image-compression)
+- New Arrivals page is a server component — fetch on the server, 
+  not client-side
+- Loading and empty states required on New Arrivals page
+- Admin form must handle upload progress and success/error feedback
+- Never expose ADMIN_PIN or Cloudinary secret keys client-side
+
+### Environment Variables to Check
+
+NEXT_PUBLIC_SUPABASE_URL=
+NEXT_PUBLIC_SUPABASE_ANON_KEY=
+CLOUDINARY_CLOUD_NAME=         
+CLOUDINARY_API_KEY=
+CLOUDINARY_API_SECRET=
+ADMIN_PIN=     
+NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=                
+
+
+
+

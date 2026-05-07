@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;family=Noto+Serif:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-fixed": "#e5e2e1",
+                        "outline-variant": "#c4c7c7",
+                        "primary-fixed-dim": "#c8c6c5",
+                        "on-surface-variant": "#444748",
+                        "accent": "#A0866A",
+                        "on-secondary-container": "#776047",
+                        "button-text": "#FFFFFF",
+                        "error": "#ba1a1a",
+                        "on-primary-container": "#858383",
+                        "inverse-on-surface": "#f4f0ef",
+                        "secondary-container": "#fdddbd",
+                        "primary-container": "#1c1b1b",
+                        "surface": "#FFFFFF",
+                        "on-primary-fixed": "#1c1b1b",
+                        "surface-tint": "#5f5e5e",
+                        "on-tertiary-fixed-variant": "#484645",
+                        "surface-container-low": "#f7f3f2",
+                        "outline": "#747878",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary-fixed-variant": "#58432b",
+                        "on-error": "#ffffff",
+                        "inverse-primary": "#c8c6c5",
+                        "tertiary-fixed": "#e6e1df",
+                        "secondary": "#715a41",
+                        "tertiary-fixed-dim": "#cac6c3",
+                        "surface-container": "#f1edec",
+                        "on-secondary-fixed": "#281805",
+                        "surface-container-high": "#ebe7e6",
+                        "on-primary-fixed-variant": "#474646",
+                        "on-tertiary-fixed": "#1d1b1a",
+                        "error-container": "#ffdad6",
+                        "surface-container-highest": "#e5e2e1",
+                        "surface-dim": "#ddd9d8",
+                        "foreground": "#111111",
+                        "on-secondary": "#ffffff",
+                        "secondary-fixed": "#fdddbd",
+                        "tertiary": "#000000",
+                        "on-background": "#1c1b1b",
+                        "on-tertiary": "#ffffff",
+                        "primary": "#000000",
+                        "on-error-container": "#93000a",
+                        "tertiary-container": "#1d1b1a",
+                        "button-bg": "#111111",
+                        "on-surface": "#1c1b1b",
+                        "on-primary": "#ffffff",
+                        "secondary-fixed-dim": "#dfc1a2",
+                        "surface-variant": "#e5e2e1",
+                        "inverse-surface": "#313030",
+                        "surface-bright": "#fdf8f8",
+                        "background": "#FAF6F1",
+                        "muted": "#C8C0B8",
+                        "on-tertiary-container": "#868381"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "stack-gap": "16px",
+                        "section-py": "80px",
+                        "gutter": "24px",
+                        "container-padding": "40px"
+                    },
+                    "fontFamily": {
+                        "h3": ["Noto Serif"],
+                        "h1": ["Noto Serif"],
+                        "h2": ["Noto Serif"],
+                        "nav-link": ["Inter"],
+                        "body-md": ["Inter"],
+                        "button-label": ["Inter"],
+                        "hero": ["Noto Serif"],
+                        "body-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "h3": ["28px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                        "h1": ["48px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                        "h2": ["36px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                        "nav-link": ["12px", {"lineHeight": "1", "letterSpacing": "0.15em", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "button-label": ["13px", {"lineHeight": "1", "letterSpacing": "0.1em", "fontWeight": "600"}],
+                        "hero": ["80px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #FAF6F1;
+        }
+    </style>
+</head>
+<body class="font-body-md text-on-background antialiased">
+<!-- TopNavBar -->
+<nav class="fixed top-0 left-0 w-full z-50 bg-background/90 backdrop-blur-md">
+<div class="flex justify-between items-center w-full px-container-padding py-6 max-w-screen-2xl mx-auto">
+<div class="font-h1 text-h2 tracking-[0.15em] text-primary">ADONESS</div>
+<div class="hidden md:flex items-center space-x-12">
+<a class="font-nav-link text-nav-link uppercase tracking-[0.2em] text-on-surface-variant hover:text-accent transition-colors duration-300" href="#">COLLECTIONS</a>
+<a class="font-nav-link text-nav-link uppercase tracking-[0.2em] text-on-surface-variant hover:text-accent transition-colors duration-300" href="#">EDITORIAL</a>
+<a class="font-nav-link text-nav-link uppercase tracking-[0.2em] text-primary border-b border-primary pb-1 hover:text-accent transition-colors duration-300" href="#">STORY</a>
+<a class="font-nav-link text-nav-link uppercase tracking-[0.2em] text-on-surface-variant hover:text-accent transition-colors duration-300" href="#">ATELIER</a>
+</div>
+<div class="flex items-center space-x-6">
+<button class="text-primary hover:text-accent transition-colors">
+<span class="material-symbols-outlined" data-icon="search">search</span>
+</button>
+<button class="text-primary hover:text-accent transition-colors">
+<span class="material-symbols-outlined" data-icon="shopping_bag">shopping_bag</span>
+</button>
+</div>
+</div>
+</nav>
+<main class="pt-24">
+<!-- Hero Section: Split Layout -->
+<section class="px-container-padding py-section-py max-w-screen-2xl mx-auto">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+<div class="relative">
+<div class="aspect-[1.33] overflow-hidden rounded-xl shadow-[0_20px_50px_rgba(0,0,0,0.05)]">
+<img alt="Adoness Design Studio" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida/ADBb0ugTaaONMlWN0cNjOWPMs7CcqXNL4q8e4HjWMoWBANgh_9lu9Mx0xLbGsofWu7XWlRJ1lxucSl0P7t6cuxTkAe63Agv7k-BdVokRrycKC2R6LaldnhWBPmQEM4ilvAJ44Ate6gXaGnYoUEYBZ5XVsjYJdzFpyRfJN1v5qI-IvJ1phhIr5_O1ejYb90xn4MJMMhNjnoSIY96mTdawn3mUeq8KiwS8LjfqI3jzE9zAFAbB3E4oUrp47IkAk5QA-V02JOt_zTn-eSsFmdQ"/>
+</div>
+<!-- Decorative Element -->
+<div class="absolute -bottom-6 -left-6 w-32 h-32 bg-accent/10 -z-10 rounded-full blur-3xl"></div>
+</div>
+<div class="space-y-8">
+<h1 class="font-h1 text-hero text-primary leading-tight">The Story Behind Adoness</h1>
+<div class="space-y-6">
+<p class="font-body-lg text-on-surface-variant max-w-xl">
+                            Founded on the principle of warm minimalism, Adoness Design bridges the gap between traditional craftsmanship and contemporary editorial aesthetics. We believe that a space should breathe, evoke emotion, and stand the test of time through intentional simplicity.
+                        </p>
+<p class="font-body-md text-on-surface-variant max-w-xl">
+                            Our journey began in a small sun-drenched studio, where we obsessed over the tactile nature of textiles and the honest silhouette of raw timber. Today, Adoness is a global curation of design excellence, serving those who seek more than just furniture—they seek a legacy of refined living.
+                        </p>
+</div>
+</div>
+</div>
+</section>
+<!-- Our Process Section -->
+<section class="bg-surface-container-low/50 py-section-py px-container-padding">
+<div class="max-w-screen-2xl mx-auto">
+<div class="text-center mb-16">
+<h2 class="font-h2 text-h2 text-primary mb-4">Our Process</h2>
+<div class="w-24 h-px bg-accent mx-auto"></div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+<!-- Step 1 -->
+<div class="group">
+<div class="aspect-[4/5] rounded-xl overflow-hidden mb-6 shadow-sm group-hover:shadow-lg transition-shadow duration-500">
+<img class="w-full h-full object-cover" data-alt="A detailed close-up shot of architectural blueprints and fabric swatches in neutral tones like beige and charcoal. The lighting is soft and natural, coming from a side window, highlighting the texture of the linen. The overall aesthetic is premium, clean, and meticulously organized on a light oak desk." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDkgDuhand_0Xt3mWWD2A59p2VWHoAXd2r-CHYreAmVLKRiu0pIlGwFfgcPPv6dWXi_ynsdj8eMAZ0dU1ApAVLBWF696x0nBwm_n43--n6w4EamdLI1ELjD-PSJotgbnAHNaCSIgX8MOsrfgtBjsl0Qyp-a-ZW0B31KGJEqO2SKGahfSbyQvcoMtBjo_k8Jpj7YDjNaM0w4r0glDoI6N9s3kR8ovMU5NmJR7RNNPp1ezPbBLE8J0TLLSEfRiOWt8NtApNGwFR_LPtYX"/>
+</div>
+<span class="font-nav-link text-accent uppercase tracking-widest block mb-2">01. Conceptualization</span>
+<h3 class="font-h3 text-h3 text-primary mb-3">The Narrative Start</h3>
+<p class="font-body-md text-on-surface-variant">Every collection begins with a story. We curate moods, textures, and architectural silhouettes before the first sketch is even drawn.</p>
+</div>
+<!-- Step 2 -->
+<div class="group md:mt-12">
+<div class="aspect-[4/5] rounded-xl overflow-hidden mb-6 shadow-sm group-hover:shadow-lg transition-shadow duration-500">
+<img class="w-full h-full object-cover" data-alt="A master craftsman's hands working with a piece of dark, polished walnut wood. The setting is a bright, modern workshop with tools neatly arranged in the background. The lighting is warm and cinematic, emphasizing the grain of the wood and the precision of the artisan's touch in a luxury design context." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAGkxcB14AVTInIjelsTqsV7Z6Dunls6YsYNWFV1T2yi5dZlfhQ56UzdHIukO2ig1ReekLnKKrAE7P9H2cZBDku97SnxCNhW1XAXSjq9gd1gDbkxvjsZnkDBKlfH9w3Baddk4yCTxNk-hcFQCsQ4tZE3QSW3OC46HTyuTHlHcgov7RWT87N2pwULDuMwwxTXQxmqnsoGMOhxcUimBy06WzC9n1dgWz1FjiB3Ur_dCsKHWI7rB4-yYqLHd6oG2YEgif4vwqnfxIuzemS"/>
+</div>
+<span class="font-nav-link text-accent uppercase tracking-widest block mb-2">02. Craftsmanship</span>
+<h3 class="font-h3 text-h3 text-primary mb-3">Artisan Precision</h3>
+<p class="font-body-md text-on-surface-variant">We partner with local artisans who treat materials with reverence. Each piece is hand-finished to ensure a unique, human touch in every curve.</p>
+</div>
+<!-- Step 3 -->
+<div class="group">
+<div class="aspect-[4/5] rounded-xl overflow-hidden mb-6 shadow-sm group-hover:shadow-lg transition-shadow duration-500">
+<img class="w-full h-full object-cover" data-alt="A beautifully styled minimalist living room featuring an Adoness chair and a marble side table. The space is bathed in golden hour sunlight, creating long, soft shadows. The color palette is a sophisticated mix of cream, tan, and matte black, embodying a luxury editorial magazine layout." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAtWPRvOrcTjeDeflVDAbsZIn5Ofmg6syObBUOlHbP_DDBJ-xNIpVAqCRjIOMk252pq7HwPkzyu6PFd_ya-m0CGs0xMGN3YdYo2uBDSXl2M16414uwUla_ws1Mis7SuX-py8m5pFW0HANjtgZDBexwCfVV0ns3d3Lotb_pTU9MTFsmXPtZ8sx_cTQE9QWzK8FLWaSrdsgZRVssvDNOzV4Sp8LkNbWDCWCE7iZQ9IcjZgyHSUc859TpygXrsyJZSmi7uVG3qTU0Nus-t"/>
+</div>
+<span class="font-nav-link text-accent uppercase tracking-widest block mb-2">03. Curation</span>
+<h3 class="font-h3 text-h3 text-primary mb-3">Spatial Harmony</h3>
+<p class="font-body-md text-on-surface-variant">Finally, we style each piece within an editorial context, ensuring that Adoness products bring balance and serenity to your environment.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- CTA Section -->
+<section class="py-section-py px-container-padding text-center">
+<div class="max-w-3xl mx-auto py-20 border-t border-outline-variant/30">
+<h2 class="font-h2 text-h2 text-primary mb-8">Ready to define your space?</h2>
+<a class="inline-block bg-primary text-background px-12 py-5 rounded-full font-button-label text-button-label uppercase tracking-widest hover:bg-accent transition-colors duration-300 shadow-md" href="#">
+                    View Collections
+                </a>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-low border-t border-outline-variant/30">
+<div class="flex flex-col items-center justify-center w-full px-container-padding py-section-py text-center max-w-screen-2xl mx-auto">
+<div class="font-h2 text-h3 text-primary mb-4">ADONESS</div>
+<div class="flex flex-wrap justify-center gap-x-8 gap-y-4 mb-8">
+<a class="font-nav-link text-nav-link uppercase tracking-wider text-on-surface-variant hover:text-accent transition-colors duration-300" href="#">PRIVACY POLICY</a>
+<a class="font-nav-link text-nav-link uppercase tracking-wider text-on-surface-variant hover:text-accent transition-colors duration-300" href="#">TERMS OF SERVICE</a>
+<a class="font-nav-link text-nav-link uppercase tracking-wider text-on-surface-variant hover:text-accent transition-colors duration-300" href="#">SHIPPING &amp; RETURNS</a>
+<a class="font-nav-link text-nav-link uppercase tracking-wider text-on-surface-variant hover:text-accent transition-colors duration-300" href="#">CONTACT</a>
+</div>
+<p class="font-body-md text-[12px] text-on-surface-variant opacity-70">
+                © 2024 ADONESS DESIGN. ALL RIGHTS RESERVED.
+            </p>
+</div>
+</footer>
+</body></html>

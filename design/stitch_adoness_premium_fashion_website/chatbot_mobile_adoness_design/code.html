@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ADONESS | Luxury Editorial Chat</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;family=Noto+Serif:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "primary-fixed": "#e5e2e1",
+                    "outline-variant": "#c4c7c7",
+                    "primary-fixed-dim": "#c8c6c5",
+                    "on-surface-variant": "#444748",
+                    "accent": "#A0866A",
+                    "on-secondary-container": "#776047",
+                    "button-text": "#FFFFFF",
+                    "error": "#ba1a1a",
+                    "on-primary-container": "#858383",
+                    "inverse-on-surface": "#f4f0ef",
+                    "secondary-container": "#fdddbd",
+                    "primary-container": "#1c1b1b",
+                    "surface": "#FFFFFF",
+                    "on-primary-fixed": "#1c1b1b",
+                    "surface-tint": "#5f5e5e",
+                    "on-tertiary-fixed-variant": "#484645",
+                    "surface-container-low": "#f7f3f2",
+                    "outline": "#747878",
+                    "surface-container-lowest": "#ffffff",
+                    "on-secondary-fixed-variant": "#58432b",
+                    "on-error": "#ffffff",
+                    "inverse-primary": "#c8c6c5",
+                    "tertiary-fixed": "#e6e1df",
+                    "secondary": "#715a41",
+                    "tertiary-fixed-dim": "#cac6c3",
+                    "surface-container": "#f1edec",
+                    "on-secondary-fixed": "#281805",
+                    "surface-container-high": "#ebe7e6",
+                    "on-primary-fixed-variant": "#474646",
+                    "on-tertiary-fixed": "#1d1b1a",
+                    "error-container": "#ffdad6",
+                    "surface-container-highest": "#e5e2e1",
+                    "surface-dim": "#ddd9d8",
+                    "foreground": "#111111",
+                    "on-secondary": "#ffffff",
+                    "secondary-fixed": "#fdddbd",
+                    "tertiary": "#000000",
+                    "on-background": "#1c1b1b",
+                    "on-tertiary": "#ffffff",
+                    "primary": "#000000",
+                    "on-error-container": "#93000a",
+                    "tertiary-container": "#1d1b1a",
+                    "button-bg": "#111111",
+                    "on-surface": "#1c1b1b",
+                    "on-primary": "#ffffff",
+                    "secondary-fixed-dim": "#dfc1a2",
+                    "surface-variant": "#e5e2e1",
+                    "inverse-surface": "#313030",
+                    "surface-bright": "#fdf8f8",
+                    "background": "#FAF6F1",
+                    "muted": "#C8C0B8",
+                    "on-tertiary-container": "#868381"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "stack-gap": "16px",
+                    "section-py": "80px",
+                    "gutter": "24px",
+                    "container-padding": "40px"
+            },
+            "fontFamily": {
+                    "h3": ["Noto Serif", "serif"],
+                    "h1": ["Noto Serif", "serif"],
+                    "h2": ["Noto Serif", "serif"],
+                    "nav-link": ["Inter", "sans-serif"],
+                    "body-md": ["Inter", "sans-serif"],
+                    "button-label": ["Inter", "sans-serif"],
+                    "hero": ["Noto Serif", "serif"],
+                    "body-lg": ["Inter", "sans-serif"]
+            },
+            "fontSize": {
+                    "h3": ["28px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                    "h1": ["48px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                    "h2": ["36px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                    "nav-link": ["12px", {"lineHeight": "1", "letterSpacing": "0.15em", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "button-label": ["13px", {"lineHeight": "1", "letterSpacing": "0.1em", "fontWeight": "600"}],
+                    "hero": ["80px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        .editorial-shadow {
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08);
+        }
+        .dot-grid {
+            background-image: radial-gradient(circle, #C8C0B8 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md overflow-hidden">
+<!-- Background: Mobile Home Page Simulator (Blurred/Overlayed) -->
+<main class="fixed inset-0 w-[375px] mx-auto bg-background overflow-y-auto filter blur-[2px] opacity-40 pointer-events-none">
+<!-- TopNavBar -->
+<header class="bg-background/90 backdrop-blur-md sticky top-0 z-10 flex justify-between items-center w-full px-8 py-6 max-w-screen-2xl mx-auto">
+<span class="font-h1 text-h2 tracking-[0.15em] text-primary text-center">ADONESS</span>
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-primary" data-icon="search">search</span>
+<span class="material-symbols-outlined text-primary" data-icon="shopping_bag">shopping_bag</span>
+</div>
+</header>
+<!-- Hero Section -->
+<section class="px-8 py-10 dot-grid">
+<div class="mb-8">
+<p class="font-nav-link text-nav-link uppercase tracking-[0.2em] text-accent mb-2">Summer 2024</p>
+<h1 class="font-h1 text-h2 leading-tight">The Modern <br/>Atelier.</h1>
+</div>
+<div class="relative w-full aspect-[3/4] rounded-xl overflow-hidden shadow-2xl mb-12">
+<img alt="Editorial Fashion" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida/ADBb0ugTaaONMlWN0cNjOWPMs7CcqXNL4q8e4HjWMoWBANgh_9lu9Mx0xLbGsofWu7XWlRJ1lxucSl0P7t6cuxTkAe63Agv7k-BdVokRrycKC2R6LaldnhWBPmQEM4ilvAJ44Ate6gXaGnYoUEYBZ5XVsjYJdzFpyRfJN1v5qI-IvJ1phhIr5_O1ejYb90xn4MJMMhNjnoSIY96mTdawn3mUeq8KiwS8LjfqI3jzE9zAFAbB3E4oUrp47IkAk5QA-V02JOt_zTn-eSsFmdQ"/>
+</div>
+</section>
+<!-- Collection Grid -->
+<section class="px-8 space-y-12 pb-24">
+<div class="space-y-4">
+<div class="w-2/3 aspect-[4/5] bg-surface rounded-xl overflow-hidden shadow-sm">
+<img class="w-full h-full object-cover" data-alt="High-end editorial fashion photography of a model in minimalist ivory silk garments, posing against a soft cream architectural background. The lighting is diffused and natural, emphasizing textures of the fabric. The aesthetic is sophisticated and high-fashion, aligned with luxury brand standards and clean minimalism." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAU7XpVhO6ut2e93q3cxNUmBOJvjGKcsZlP7Wk8s_giurGxNSv795_-9O2jq54RdgiO3eQisAr89yp48nCfi-u31C5qOR6mpIBF3U4gKs69dKKklL68NHxn5hpGFtKfGwS3nTU67KU0G3CbIObostpzqEqeu5wa9AVqHSRm28xyKZg_zYWxhpzajgTPzP98X-mvAmwt5jG4G5yXRfZZz10oTiQLGE631zM4CAWnWs7GCVRZLiILTuvZOdu0zX9RP_hinOLpKj2-_F3g"/>
+</div>
+<h3 class="font-h3 text-body-lg">Silk Drape Collection</h3>
+</div>
+</section>
+</main>
+<!-- Modal Backdrop -->
+<div class="fixed inset-0 bg-primary/20 backdrop-blur-[1px] z-40 flex items-center justify-center">
+<!-- Chatbot Modal (90% Width) -->
+<div class="w-[337px] h-[600px] bg-background rounded-3xl overflow-hidden editorial-shadow flex flex-col relative z-50">
+<!-- Dark Green Header (As requested: Dark Green/Primary-Container) -->
+<header class="bg-primary-container text-on-primary-container px-6 py-5 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-accent flex items-center justify-center text-white">
+<span class="material-symbols-outlined" data-icon="auto_awesome">auto_awesome</span>
+</div>
+<div>
+<h4 class="font-h3 text-[16px] leading-none text-white">Adoness Concierge</h4>
+<p class="text-[11px] opacity-70 uppercase tracking-widest mt-1">Online</p>
+</div>
+</div>
+<button class="w-8 h-8 flex items-center justify-center rounded-full hover:bg-white/10 transition-colors">
+<span class="material-symbols-outlined text-white" data-icon="close">close</span>
+</button>
+</header>
+<!-- Chat Content -->
+<div class="flex-1 overflow-y-auto p-6 space-y-6">
+<!-- System Message -->
+<div class="flex flex-col items-start max-w-[85%]">
+<div class="bg-surface-container-high text-on-surface p-4 rounded-2xl rounded-tl-none">
+<p class="text-body-md text-[14px]">Welcome to the ADONESS Atelier. How may I assist your style journey today?</p>
+</div>
+<span class="text-[10px] text-muted uppercase tracking-tighter mt-2 ml-1">10:42 AM</span>
+</div>
+<!-- User Message -->
+<div class="flex flex-col items-end w-full">
+<div class="max-w-[85%] bg-primary text-on-primary p-4 rounded-2xl rounded-tr-none">
+<p class="text-body-md text-[14px]">I'm looking for the Silk Drape Collection in size medium.</p>
+</div>
+<span class="text-[10px] text-muted uppercase tracking-tighter mt-2 mr-1">10:43 AM</span>
+</div>
+<!-- Bot Typing/Response -->
+<div class="flex flex-col items-start max-w-[85%]">
+<div class="bg-surface-container-high text-on-surface p-4 rounded-2xl rounded-tl-none">
+<p class="text-body-md text-[14px]">The Silk Drape Collection is currently available. Would you like me to add a medium ivory set to your bag?</p>
+</div>
+<div class="mt-3 flex gap-2 flex-wrap">
+<button class="px-4 py-2 border border-outline-variant rounded-full text-[12px] font-nav-link uppercase hover:bg-accent hover:text-white transition-all">Yes, please</button>
+<button class="px-4 py-2 border border-outline-variant rounded-full text-[12px] font-nav-link uppercase hover:bg-accent hover:text-white transition-all">See colors</button>
+</div>
+</div>
+</div>
+<!-- Rounded Input Bar -->
+<footer class="p-4 bg-background border-t border-outline-variant/20">
+<div class="relative flex items-center">
+<input class="w-full bg-surface-container-low border-none rounded-full py-4 pl-6 pr-14 text-[14px] focus:ring-1 focus:ring-accent placeholder:text-muted" placeholder="Type your message..." type="text"/>
+<button class="absolute right-2 w-10 h-10 bg-primary text-on-primary rounded-full flex items-center justify-center hover:bg-accent transition-colors">
+<span class="material-symbols-outlined text-[20px]" data-icon="arrow_upward">arrow_upward</span>
+</button>
+</div>
+</footer>
+</div>
+</div>
+<!-- Floating Dark Trigger Button (Submerged beneath modal in this view) -->
+<button class="fixed bottom-8 right-8 w-16 h-16 bg-primary text-on-primary rounded-full shadow-2xl flex items-center justify-center z-30 transition-transform active:scale-95">
+<span class="material-symbols-outlined text-[32px]" data-icon="chat_bubble" data-weight="fill" style="font-variation-settings: 'FILL' 1;">chat_bubble</span>
+</button>
+<!-- Footer Segment (Shadowed) -->
+<footer class="fixed bottom-0 left-0 right-0 bg-surface-container-low border-t border-outline-variant/30 py-6 px-8 flex flex-col items-center opacity-0 pointer-events-none">
+<span class="font-h3 text-[18px] text-primary mb-2">ADONESS</span>
+<p class="text-[10px] text-on-surface-variant tracking-widest uppercase">© 2024 ADONESS DESIGN.</p>
+</footer>
+</body></html>

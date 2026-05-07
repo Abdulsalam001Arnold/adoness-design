@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;family=Noto+Serif:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-fixed": "#e5e2e1",
+                        "outline-variant": "#c4c7c7",
+                        "primary-fixed-dim": "#c8c6c5",
+                        "on-surface-variant": "#444748",
+                        "accent": "#A0866A",
+                        "on-secondary-container": "#776047",
+                        "button-text": "#FFFFFF",
+                        "error": "#ba1a1a",
+                        "on-primary-container": "#858383",
+                        "inverse-on-surface": "#f4f0ef",
+                        "secondary-container": "#fdddbd",
+                        "primary-container": "#1c1b1b",
+                        "surface": "#FFFFFF",
+                        "on-primary-fixed": "#1c1b1b",
+                        "surface-tint": "#5f5e5e",
+                        "on-tertiary-fixed-variant": "#484645",
+                        "surface-container-low": "#f7f3f2",
+                        "outline": "#747878",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary-fixed-variant": "#58432b",
+                        "on-error": "#ffffff",
+                        "inverse-primary": "#c8c6c5",
+                        "tertiary-fixed": "#e6e1df",
+                        "secondary": "#715a41",
+                        "tertiary-fixed-dim": "#cac6c3",
+                        "surface-container": "#f1edec",
+                        "on-secondary-fixed": "#281805",
+                        "surface-container-high": "#ebe7e6",
+                        "on-primary-fixed-variant": "#474646",
+                        "on-tertiary-fixed": "#1d1b1a",
+                        "error-container": "#ffdad6",
+                        "surface-container-highest": "#e5e2e1",
+                        "surface-dim": "#ddd9d8",
+                        "foreground": "#111111",
+                        "on-secondary": "#ffffff",
+                        "secondary-fixed": "#fdddbd",
+                        "tertiary": "#000000",
+                        "on-background": "#1c1b1b",
+                        "on-tertiary": "#ffffff",
+                        "primary": "#000000",
+                        "on-error-container": "#93000a",
+                        "tertiary-container": "#1d1b1a",
+                        "button-bg": "#111111",
+                        "on-surface": "#1c1b1b",
+                        "on-primary": "#ffffff",
+                        "secondary-fixed-dim": "#dfc1a2",
+                        "surface-variant": "#e5e2e1",
+                        "inverse-surface": "#313030",
+                        "surface-bright": "#fdf8f8",
+                        "background": "#FAF6F1",
+                        "muted": "#C8C0B8",
+                        "on-tertiary-container": "#868381"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "stack-gap": "16px",
+                        "section-py": "80px",
+                        "gutter": "24px",
+                        "container-padding": "40px"
+                    },
+                    "fontFamily": {
+                        "h3": ["Noto Serif"],
+                        "h1": ["Noto Serif"],
+                        "h2": ["Noto Serif"],
+                        "nav-link": ["Inter"],
+                        "body-md": ["Inter"],
+                        "button-label": ["Inter"],
+                        "hero": ["Noto Serif"],
+                        "body-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "h3": ["28px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                        "h1": ["48px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                        "h2": ["36px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                        "nav-link": ["12px", {"lineHeight": "1", "letterSpacing": "0.15em", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "button-label": ["13px", {"lineHeight": "1", "letterSpacing": "0.1em", "fontWeight": "600"}],
+                        "hero": ["80px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #FAF6F1;
+            color: #1c1b1b;
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body class="font-body-md text-body-md overflow-x-hidden">
+<!-- TopNavBar -->
+<header class="fixed top-0 left-0 w-full z-50 bg-background/90 backdrop-blur-md">
+<nav class="flex justify-between items-center w-full px-container-padding py-6 max-w-screen-2xl mx-auto">
+<div class="flex-1 hidden md:flex gap-8">
+<a class="font-nav-link text-nav-link uppercase tracking-[0.2em] text-primary border-b border-primary pb-1 hover:text-accent transition-colors duration-300" href="#">COLLECTIONS</a>
+<a class="font-nav-link text-nav-link uppercase tracking-[0.2em] text-on-surface-variant pb-1 hover:text-accent transition-colors duration-300" href="#">EDITORIAL</a>
+<a class="font-nav-link text-nav-link uppercase tracking-[0.2em] text-on-surface-variant pb-1 hover:text-accent transition-colors duration-300" href="#">STORY</a>
+<a class="font-nav-link text-nav-link uppercase tracking-[0.2em] text-on-surface-variant pb-1 hover:text-accent transition-colors duration-300" href="#">ATELIER</a>
+</div>
+<div class="flex-1 flex justify-center md:justify-center">
+<span class="font-h1 text-h2 tracking-[0.15em] text-primary text-center">ADONESS</span>
+</div>
+<div class="flex-1 flex justify-end gap-6 items-center">
+<button class="hover:text-accent transition-colors duration-300">
+<span class="material-symbols-outlined" data-icon="search">search</span>
+</button>
+<button class="hover:text-accent transition-colors duration-300">
+<span class="material-symbols-outlined" data-icon="shopping_bag">shopping_bag</span>
+</button>
+<button class="md:hidden">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</button>
+</div>
+</nav>
+</header>
+<main>
+<!-- Hero Section -->
+<section class="relative min-h-screen flex items-center pt-24">
+<div class="absolute inset-0 z-0 pointer-events-none opacity-20" style="background-image: radial-gradient(#C8C0B8 1px, transparent 1px); background-size: 40px 40px;"></div>
+<div class="max-w-screen-2xl mx-auto px-container-padding grid grid-cols-1 md:grid-cols-12 gap-gutter relative z-10">
+<div class="md:col-span-6 flex flex-col justify-center">
+<h1 class="font-hero text-hero text-primary mb-8 max-w-xl">Elegance in Every Thread.</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-10 max-w-md">
+                        Explore the intersection of architectural precision and fluid movement. Our new collection redefines the modern silhouette for the timeless individual.
+                    </p>
+<div class="flex gap-4">
+<button class="bg-foreground text-background font-button-label text-button-label px-10 py-4 rounded-full hover:bg-accent transition-all duration-300">SHOP NEW ARRIVALS</button>
+</div>
+</div>
+<div class="md:col-span-6 flex justify-end items-center relative h-[600px] md:h-auto">
+<div class="relative w-full aspect-[3/4] md:w-4/5 rounded-xl overflow-hidden shadow-xl transform translate-y-8">
+<img alt="Luxury fashion model in architecturally inspired garment" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida/ADBb0ugTaaONMlWN0cNjOWPMs7CcqXNL4q8e4HjWMoWBANgh_9lu9Mx0xLbGsofWu7XWlRJ1lxucSl0P7t6cuxTkAe63Agv7k-BdVokRrycKC2R6LaldnhWBPmQEM4ilvAJ44Ate6gXaGnYoUEYBZ5XVsjYJdzFpyRfJN1v5qI-IvJ1phhIr5_O1ejYb90xn4MJMMhNjnoSIY96mTdawn3mUeq8KiwS8LjfqI3jzE9zAFAbB3E4oUrp47IkAk5QA-V02JOt_zTn-eSsFmdQ"/>
+</div>
+<div class="absolute top-0 right-0 w-1/2 aspect-square rounded-xl overflow-hidden shadow-lg border-8 border-background transform -translate-x-12 -translate-y-12 hidden md:block">
+<div class="w-full h-full bg-surface-container flex items-center justify-center p-8">
+<img class="w-full h-full object-cover rounded-lg" data-alt="A close-up high-fashion editorial shot of luxurious fabric textures in soft cream and tan tones. The lighting is soft and directional, highlighting the intricate weave and premium quality of the material. The background is a clean, minimalist studio setting that aligns with the warm minimal brand aesthetic of Adoness." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBa61ZwOdbFcmcepn4DG497DnjHDox-hnGS8Htsw1S1i9YFo0itXunEyk96XYnxCAHz4_YorJLDvVWvC_5t_wg2RZ7YNYWStfgjkVrpKPLv_wG-I8nrt6GbhuO0SRrTddGK6QKurYAvc9ttSUB7MXOGtdygtJ_JTD8nyXOqvBpd5z7Y5G8pGwiN12dSTK1cs1H3eVU67MFi1EGLjClvOfOdcB6IcKOiTLYG8hnMtzQrIqyAPJrES4zEKXQsbjl_sQCgaBF-jRV8B_gu"/>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Editorial Grid -->
+<section class="py-section-py px-container-padding max-w-screen-2xl mx-auto">
+<div class="mb-16">
+<span class="font-nav-link text-nav-link text-accent uppercase tracking-widest block mb-4">The Journal</span>
+<h2 class="font-h2 text-h2 text-primary">Seasonal Narrative</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-12 items-start">
+<!-- Card 1 -->
+<div class="flex flex-col space-y-6 transform md:translate-y-12">
+<div class="rounded-xl overflow-hidden shadow-lg aspect-[4/5]">
+<img class="w-full h-full object-cover" data-alt="An editorial fashion photograph of a minimalist outfit styled against a stark, off-white architectural background. A model wears a structured tan blazer and matching trousers, embodying a warm minimal aesthetic. The composition uses clean lines and negative space, reflecting a premium luxury magazine layout. Lighting is bright, airy, and soft." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBt-qzD2Z5BP9_UGHPuZS270b662xtttbIDRU94qUeQCi8Dw9DY37_RCTIuxBZwFGMnhDIbqIDePSskanIWjjlZAOVLO8y3yd8u8mBNKYKoUJC2Ksvkp6TfONcNFKh0Q1whpxlI6rF1w5UAwCYclkA40pkTnVwNq6kvnpZAmm7r0tbCcwF3DLnl8Zfxxp_-UiiVhg6zFZzumNQk8OkZaFlcS5UUCnnHAAwNnYlo6eyDinJJJxKbOqF5X34Ujj9wLsqNXH8ElB_L4M0J"/>
+</div>
+<h3 class="font-h3 text-h3">The Structure of Flow</h3>
+<p class="text-on-surface-variant max-w-xs">An exploration into how tailoring can remain rigid yet move with the human form effortlessly.</p>
+</div>
+<!-- Card 2 -->
+<div class="flex flex-col space-y-6">
+<div class="rounded-xl overflow-hidden shadow-lg aspect-[1/1]">
+<img class="w-full h-full object-cover" data-alt="A sophisticated still life image of luxury leather accessories arranged on a textured cream surface. The palette consists of deep blacks, rich tans, and soft ivory. The lighting is subtle, creating gentle shadows that emphasize the craftsmanship and premium quality of the items. The mood is calm, high-end, and modern." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCO-o3LG_F1ODVvxD1acEgLGQ7w811EeyK8UtuXf49T3rfx5qvrz1-0dqjSvy1dbHL8g-nPDGAzyMTpwdGWSVwhNhCVE0nWZK9j5MGMHSPsdXPD836g1vHN5CjRlzV0fhvjmSzuCXGgnJYaC6lmNZSCb_WphuaieBasBisVGDd4lZuYjE4RZJU6iGQyMOuzoj9GSxIo8VZbU-U4bAo6rJbfsfBuKFc6CyjRu2v95duiZNOUJFcBiTyl7JKzt4c09qD9Dxemzfl06nZC"/>
+</div>
+<h3 class="font-h3 text-h3">Tactile Essence</h3>
+<p class="text-on-surface-variant max-w-xs">Our artisans select only the finest raw materials to ensure longevity and sensory delight.</p>
+</div>
+<!-- Card 3 -->
+<div class="flex flex-col space-y-6 transform md:-translate-y-12">
+<div class="rounded-xl overflow-hidden shadow-lg aspect-[4/5]">
+<img class="w-full h-full object-cover" data-alt="A striking portrait of a model in an avant-garde black silk gown, posed in a bright minimalist room with large windows. High-key lighting creates a brilliant, ethereal atmosphere, highlighting the movement of the fabric. The overall style is clean and editorial, emphasizing luxury and high-fashion sensibilities consistent with the Adoness brand." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDKBRHtIvIIDBZ76o_gyT1DnIvsbUqjCa8AxRPdQqhW8M_qKf081ZUv8qSzPaHi9m3JitjiXAof5eYxTulbR4bircZ43TvaoJgI_iJCKchLl03_KalDUEb8GQrlFwnKS1ewSGYCDNEZbEX1iHVswNnZWLUoPnN3KvkAF15GJwAKpWqT9s_OKgxAFIn8zMJhQ6fg0MngWD0zly17c2u2zLCzBsmsOzhbXnRNLYaIKlIPX84F_usAW58jiEc0UyPZexP6x9sKNy_NwUXR"/>
+</div>
+<h3 class="font-h3 text-h3">Midnight Muse</h3>
+<p class="text-on-surface-variant max-w-xs">Evening wear designed for the quiet moments of profound sophistication.</p>
+</div>
+</div>
+</section>
+</main>
+<!-- Chatbot Modal Layer -->
+<div class="fixed bottom-8 right-8 z-[100] flex flex-col items-end gap-4 pointer-events-none">
+<!-- Chatbot Window -->
+<div class="w-80 md:w-96 bg-background rounded-2xl shadow-2xl flex flex-col overflow-hidden pointer-events-auto border border-outline-variant/20 mb-2 transform origin-bottom-right transition-all duration-500">
+<!-- Header -->
+<div class="bg-primary-container p-4 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-2 h-2 rounded-full bg-accent animate-pulse"></div>
+<span class="font-button-label text-button-label text-on-primary tracking-widest uppercase">ADONESS ASSISTANT</span>
+</div>
+<button class="text-on-primary/60 hover:text-on-primary">
+<span class="material-symbols-outlined" data-icon="close">close</span>
+</button>
+</div>
+<!-- Chat Body -->
+<div class="h-96 overflow-y-auto p-5 space-y-4 flex flex-col">
+<!-- Bot Bubble -->
+<div class="flex flex-col items-start max-w-[85%] animate-fade-in">
+<div class="bg-surface-container-high px-4 py-3 rounded-2xl rounded-tl-none shadow-sm">
+<p class="text-body-md text-primary">Good evening. How may I assist your experience with Adoness today?</p>
+</div>
+<span class="text-[10px] text-muted mt-1 ml-1 uppercase tracking-tighter">Assistant • 18:02</span>
+</div>
+<!-- User Bubble -->
+<div class="flex flex-col items-end max-w-[85%] self-end animate-fade-in">
+<div class="bg-foreground px-4 py-3 rounded-2xl rounded-tr-none shadow-md">
+<p class="text-body-md text-background">I'm looking for the Atelier collection's latest release dates.</p>
+</div>
+<span class="text-[10px] text-muted mt-1 mr-1 uppercase tracking-tighter">You • 18:03</span>
+</div>
+<!-- Bot Bubble -->
+<div class="flex flex-col items-start max-w-[85%] animate-fade-in">
+<div class="bg-surface-container-high px-4 py-3 rounded-2xl rounded-tl-none shadow-sm">
+<p class="text-body-md text-primary">The Atelier Spring/Summer collection is scheduled for early preview this Friday. Would you like to be added to the waitlist?</p>
+</div>
+<span class="text-[10px] text-muted mt-1 ml-1 uppercase tracking-tighter">Assistant • 18:03</span>
+</div>
+</div>
+<!-- Input Area -->
+<div class="p-4 bg-surface-container-low border-t border-outline-variant/30">
+<div class="relative flex items-center">
+<input class="w-full bg-background border-none rounded-full px-5 py-3 pr-14 text-body-md focus:ring-1 focus:ring-accent outline-none placeholder:text-muted/60 shadow-inner" placeholder="Inquire here..." type="text"/>
+<button class="absolute right-1.5 w-10 h-10 bg-foreground text-background rounded-full flex items-center justify-center hover:bg-accent transition-colors duration-300 shadow-md">
+<span class="material-symbols-outlined text-[18px]" data-icon="send">send</span>
+</button>
+</div>
+</div>
+</div>
+<!-- FAB Trigger -->
+<button class="w-16 h-16 bg-foreground text-background rounded-full shadow-2xl flex items-center justify-center pointer-events-auto hover:bg-accent hover:scale-105 transition-all duration-300">
+<span class="material-symbols-outlined text-[28px]" data-icon="chat_bubble" data-weight="fill" style="font-variation-settings: 'FILL' 1;">chat_bubble</span>
+</button>
+</div>
+<!-- Footer -->
+<footer class="bg-surface-container-low border-t border-outline-variant/30">
+<div class="flex flex-col items-center justify-center w-full px-container-padding py-section-py text-center max-w-screen-2xl mx-auto">
+<span class="font-h2 text-h3 text-primary mb-4 tracking-[0.2em]">ADONESS</span>
+<div class="flex flex-wrap justify-center gap-8 mb-10">
+<a class="font-nav-link text-nav-link uppercase tracking-wider text-on-surface-variant hover:text-accent transition-colors duration-300" href="#">PRIVACY POLICY</a>
+<a class="font-nav-link text-nav-link uppercase tracking-wider text-on-surface-variant hover:text-accent transition-colors duration-300" href="#">TERMS OF SERVICE</a>
+<a class="font-nav-link text-nav-link uppercase tracking-wider text-on-surface-variant hover:text-accent transition-colors duration-300" href="#">SHIPPING &amp; RETURNS</a>
+<a class="font-nav-link text-nav-link uppercase tracking-wider text-on-surface-variant hover:text-accent transition-colors duration-300" href="#">CONTACT</a>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant opacity-60">
+                © 2024 ADONESS DESIGN. ALL RIGHTS RESERVED.
+            </p>
+</div>
+</footer>
+</body></html>

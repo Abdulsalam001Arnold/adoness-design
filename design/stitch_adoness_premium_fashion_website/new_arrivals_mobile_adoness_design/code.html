@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;family=Noto+Serif:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-fixed": "#e5e2e1",
+                        "outline-variant": "#c4c7c7",
+                        "primary-fixed-dim": "#c8c6c5",
+                        "on-surface-variant": "#444748",
+                        "accent": "#A0866A",
+                        "on-secondary-container": "#776047",
+                        "button-text": "#FFFFFF",
+                        "error": "#ba1a1a",
+                        "on-primary-container": "#858383",
+                        "inverse-on-surface": "#f4f0ef",
+                        "secondary-container": "#fdddbd",
+                        "primary-container": "#1c1b1b",
+                        "surface": "#FFFFFF",
+                        "on-primary-fixed": "#1c1b1b",
+                        "surface-tint": "#5f5e5e",
+                        "on-tertiary-fixed-variant": "#484645",
+                        "surface-container-low": "#f7f3f2",
+                        "outline": "#747878",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary-fixed-variant": "#58432b",
+                        "on-error": "#ffffff",
+                        "inverse-primary": "#c8c6c5",
+                        "tertiary-fixed": "#e6e1df",
+                        "secondary": "#715a41",
+                        "tertiary-fixed-dim": "#cac6c3",
+                        "surface-container": "#f1edec",
+                        "on-secondary-fixed": "#281805",
+                        "surface-container-high": "#ebe7e6",
+                        "on-primary-fixed-variant": "#474646",
+                        "on-tertiary-fixed": "#1d1b1a",
+                        "error-container": "#ffdad6",
+                        "surface-container-highest": "#e5e2e1",
+                        "surface-dim": "#ddd9d8",
+                        "foreground": "#111111",
+                        "on-secondary": "#ffffff",
+                        "secondary-fixed": "#fdddbd",
+                        "tertiary": "#000000",
+                        "on-background": "#1c1b1b",
+                        "on-tertiary": "#ffffff",
+                        "primary": "#000000",
+                        "on-error-container": "#93000a",
+                        "tertiary-container": "#1d1b1a",
+                        "button-bg": "#111111",
+                        "on-surface": "#1c1b1b",
+                        "on-primary": "#ffffff",
+                        "secondary-fixed-dim": "#dfc1a2",
+                        "surface-variant": "#e5e2e1",
+                        "inverse-surface": "#313030",
+                        "surface-bright": "#fdf8f8",
+                        "background": "#FAF6F1",
+                        "muted": "#C8C0B8",
+                        "on-tertiary-container": "#868381"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "stack-gap": "16px",
+                        "section-py": "80px",
+                        "gutter": "24px",
+                        "container-padding": "40px"
+                    },
+                    "fontFamily": {
+                        "h3": ["Noto Serif", "serif"],
+                        "h1": ["Noto Serif", "serif"],
+                        "h2": ["Noto Serif", "serif"],
+                        "nav-link": ["Inter", "sans-serif"],
+                        "body-md": ["Inter", "sans-serif"],
+                        "button-label": ["Inter", "sans-serif"],
+                        "hero": ["Noto Serif", "serif"],
+                        "body-lg": ["Inter", "sans-serif"]
+                    },
+                    "fontSize": {
+                        "h3": ["28px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                        "h1": ["48px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                        "h2": ["36px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                        "nav-link": ["12px", {"lineHeight": "1", "letterSpacing": "0.15em", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "button-label": ["13px", {"lineHeight": "1", "letterSpacing": "0.1em", "fontWeight": "600"}],
+                        "hero": ["80px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #FAF6F1;
+            width: 375px;
+            margin: 0 auto;
+            overflow-x: hidden;
+        }
+    </style>
+</head>
+<body class="bg-background text-primary selection:bg-accent/30">
+<!-- TopNavBar -->
+<nav class="bg-background/90 dark:bg-primary/90 backdrop-blur-md fixed full-width top-0 z-50 flex justify-between items-center w-full px-container-padding py-6 max-w-screen-2xl mx-auto">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-primary cursor-pointer" data-icon="menu">menu</span>
+</div>
+<div class="font-h1 text-h2 tracking-[0.15em] text-primary dark:text-on-primary text-center">ADONESS</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-primary" data-icon="search">search</span>
+<span class="material-symbols-outlined text-primary" data-icon="shopping_bag">shopping_bag</span>
+</div>
+</nav>
+<!-- Main Content -->
+<main class="pt-24 pb-section-py px-6">
+<!-- Header Section -->
+<header class="mb-12">
+<h1 class="font-h1 text-h1 text-primary mb-2">NEW ARRIVALS</h1>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-[280px]">Curated essential pieces for the contemporary atelier.</p>
+</header>
+<!-- Product Grid (Vertical Stack for Mobile) -->
+<section class="flex flex-col gap-10">
+<!-- Featured Product Card -->
+<article class="group relative flex flex-col gap-4">
+<div class="relative overflow-hidden rounded-xl bg-surface-container shadow-sm aspect-[3/4]">
+<img alt="New Arrival Selection" class="w-full h-full object-cover grayscale-[0.2] transition-transform duration-700 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida/ADBb0ugTaaONMlWN0cNjOWPMs7CcqXNL4q8e4HjWMoWBANgh_9lu9Mx0xLbGsofWu7XWlRJ1lxucSl0P7t6cuxTkAe63Agv7k-BdVokRrycKC2R6LaldnhWBPmQEM4ilvAJ44Ate6gXaGnYoUEYBZ5XVsjYJdzFpyRfJN1v5qI-IvJ1phhIr5_O1ejYb90xn4MJMMhNjnoSIY96mTdawn3mUeq8KiwS8LjfqI3jzE9zAFAbB3E4oUrp47IkAk5QA-V02JOt_zTn-eSsFmdQ"/>
+<span class="absolute top-4 left-4 bg-primary text-on-primary font-nav-link text-[10px] px-3 py-1.5 uppercase tracking-widest rounded-full">NEW</span>
+<button class="absolute bottom-4 right-4 bg-surface/90 backdrop-blur p-3 rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-primary" data-icon="favorite">favorite</span>
+</button>
+</div>
+<div class="flex flex-col gap-1">
+<div class="flex justify-between items-baseline">
+<h2 class="font-h3 text-h3 text-primary">SCULPTED SILHOUETTE BLAZER</h2>
+<span class="font-body-md text-primary">$420</span>
+</div>
+<p class="font-body-md text-on-surface-variant uppercase text-xs tracking-widest">Italian Wool Blend</p>
+</div>
+<button class="w-full py-4 bg-button-bg text-button-text rounded-full font-button-label uppercase hover:bg-accent transition-colors duration-300">ADD TO BAG</button>
+</article>
+<!-- Product Card 2 -->
+<article class="group relative flex flex-col gap-4">
+<div class="relative overflow-hidden rounded-xl bg-surface-container shadow-sm aspect-[3/4]">
+<img class="w-full h-full object-cover grayscale-[0.2] transition-transform duration-700 group-hover:scale-105" data-alt="A professional studio photograph of a minimalist luxury leather handbag in a deep espresso brown. The handbag is displayed on a textured stone pedestal against a warm cream background. Soft, diffused lighting creates gentle shadows, emphasizing the premium leather texture and clean architectural lines. The aesthetic is sophisticated and editorial, reflecting high-end fashion sensibilities." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB0Zuk3ujKe7fpAO8M-8LCBOwo3uye39596X4GUVKtxIhR4dHqubLo2jBayHEqYzQ-JWmv65gLgSjHIFlcCfG9g0Qgd0ByBQ2TaSMykLf26bpQgm-ym53iI5AG4QnRhCaFFjVpp211weJF9RrosSiDaxhDBcamzuDGIBM1s3wBIc1tB5ExeT4-Q2VtpDJ1zBU40_V6BI9zYN1K2X0ymcT-jazPn8H7HEI_mrve1gUOaYVeTSh6RregIw2IFv8ivTiXqaSXGm3T3wXqW"/>
+<span class="absolute top-4 left-4 bg-primary text-on-primary font-nav-link text-[10px] px-3 py-1.5 uppercase tracking-widest rounded-full">NEW</span>
+</div>
+<div class="flex flex-col gap-1">
+<div class="flex justify-between items-baseline">
+<h2 class="font-h3 text-h3 text-primary">ARCHIVAL LEATHER TOTE</h2>
+<span class="font-body-md text-primary">$380</span>
+</div>
+<p class="font-body-md text-on-surface-variant uppercase text-xs tracking-widest">Full-Grain Nappa</p>
+</div>
+<button class="w-full py-4 bg-button-bg text-button-text rounded-full font-button-label uppercase hover:bg-accent transition-colors duration-300">ADD TO BAG</button>
+</article>
+<!-- Product Card 3 -->
+<article class="group relative flex flex-col gap-4">
+<div class="relative overflow-hidden rounded-xl bg-surface-container shadow-sm aspect-[3/4]">
+<img class="w-full h-full object-cover grayscale-[0.2] transition-transform duration-700 group-hover:scale-105" data-alt="An editorial fashion shot of a premium oversized cashmere coat in a soft oatmeal color. The coat is draped elegantly over a chair in a minimalist, sun-drenched room with light-colored wooden floors. The lighting is warm and natural, casting soft shadows that highlight the high-quality textile weave. The overall mood is peaceful, luxurious, and timelessly minimal." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCoi5lqHjEO3mISCDCVkIHjUxvHL4VyvdfXv95t0aJGb7FQ0e4RXiKUIuJSX8_CanzQXtjNV-xmeIBLpj6l7jDb-IEGZ4lcDQjYwwRCyZ8cSBnYN8VB2tU4tb-6PC9l8VepDZjbOP5RqHNwb4FThwupYpUssGZiPB31PEybaxSEjIakhWjMzORpGp1yhuUiXYKyLOGaADlddpuCdMOijGGhtPLS6GLo5Gx2he-ncBiZO47UWVa7vvv7bkTvaAeQHrSGVnDHtgkPJfmE"/>
+<span class="absolute top-4 left-4 bg-primary text-on-primary font-nav-link text-[10px] px-3 py-1.5 uppercase tracking-widest rounded-full">NEW</span>
+</div>
+<div class="flex flex-col gap-1">
+<div class="flex justify-between items-baseline">
+<h2 class="font-h3 text-h3 text-primary">CASHMERE OVERCOAT</h2>
+<span class="font-body-md text-primary">$850</span>
+</div>
+<p class="font-body-md text-on-surface-variant uppercase text-xs tracking-widest">Hand-Finished Hem</p>
+</div>
+<button class="w-full py-4 bg-button-bg text-button-text rounded-full font-button-label uppercase hover:bg-accent transition-colors duration-300">ADD TO BAG</button>
+</article>
+</section>
+<!-- Newsletter Teaser (Editorial Layout) -->
+<section class="mt-section-py py-12 px-6 border-y border-outline-variant/30 flex flex-col items-center text-center">
+<h3 class="font-h2 text-h3 text-primary mb-4">THE ADONESS JOURNAL</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-8">Receive early access to seasonal drops and exclusive editorial content.</p>
+<div class="w-full flex flex-col gap-4">
+<input class="w-full bg-transparent border-0 border-b border-muted py-3 px-0 font-nav-link text-nav-link focus:ring-0 focus:border-primary placeholder:text-muted" placeholder="EMAIL ADDRESS" type="email"/>
+<button class="w-full py-4 bg-primary text-on-primary rounded-full font-button-label uppercase hover:bg-accent transition-colors duration-300">SUBSCRIBE</button>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-low dark:bg-primary-container border-t border-outline-variant/30 flex flex-col items-center justify-center w-full px-container-padding py-section-py text-center">
+<div class="font-h2 text-h3 text-primary dark:text-on-primary mb-4">ADONESS</div>
+<nav class="flex flex-col gap-4 mb-10">
+<a class="font-nav-link text-nav-link uppercase tracking-wider text-on-surface-variant hover:text-accent transition-colors duration-300" href="#">PRIVACY POLICY</a>
+<a class="font-nav-link text-nav-link uppercase tracking-wider text-on-surface-variant hover:text-accent transition-colors duration-300" href="#">TERMS OF SERVICE</a>
+<a class="font-nav-link text-nav-link uppercase tracking-wider text-on-surface-variant hover:text-accent transition-colors duration-300" href="#">SHIPPING &amp; RETURNS</a>
+<a class="font-nav-link text-nav-link uppercase tracking-wider text-on-surface-variant hover:text-accent transition-colors duration-300" href="#">CONTACT</a>
+</nav>
+<div class="font-body-md text-[10px] text-on-surface-variant/60 uppercase tracking-widest">
+            © 2024 ADONESS DESIGN. ALL RIGHTS RESERVED.
+        </div>
+</footer>
+<!-- Mobile Bottom Navigation (Persistent Shell) -->
+<div class="md:hidden fixed bottom-0 left-0 right-0 bg-background/95 backdrop-blur-lg border-t border-outline-variant/20 px-8 py-4 flex justify-between items-center z-[60]">
+<div class="flex flex-col items-center gap-1 text-primary">
+<span class="material-symbols-outlined" data-icon="home" style="font-variation-settings: 'FILL' 1;">home</span>
+<span class="text-[8px] font-nav-link uppercase tracking-tighter">HOME</span>
+</div>
+<div class="flex flex-col items-center gap-1 text-on-surface-variant/40">
+<span class="material-symbols-outlined" data-icon="auto_awesome">auto_awesome</span>
+<span class="text-[8px] font-nav-link uppercase tracking-tighter">NEW</span>
+</div>
+<div class="flex flex-col items-center gap-1 text-on-surface-variant/40">
+<span class="material-symbols-outlined" data-icon="category">category</span>
+<span class="text-[8px] font-nav-link uppercase tracking-tighter">COLLECTIONS</span>
+</div>
+<div class="flex flex-col items-center gap-1 text-on-surface-variant/40">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="text-[8px] font-nav-link uppercase tracking-tighter">PROFILE</span>
+</div>
+</div>
+</body></html>

@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=375, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,600;0,700;1,400&amp;family=Inter:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-fixed": "#e5e2e1",
+                        "outline-variant": "#c4c7c7",
+                        "primary-fixed-dim": "#c8c6c5",
+                        "on-surface-variant": "#444748",
+                        "accent": "#A0866A",
+                        "on-secondary-container": "#776047",
+                        "button-text": "#FFFFFF",
+                        "error": "#ba1a1a",
+                        "on-primary-container": "#858383",
+                        "inverse-on-surface": "#f4f0ef",
+                        "secondary-container": "#fdddbd",
+                        "primary-container": "#1c1b1b",
+                        "surface": "#FFFFFF",
+                        "on-primary-fixed": "#1c1b1b",
+                        "surface-tint": "#5f5e5e",
+                        "on-tertiary-fixed-variant": "#484645",
+                        "surface-container-low": "#f7f3f2",
+                        "outline": "#747878",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary-fixed-variant": "#58432b",
+                        "on-error": "#ffffff",
+                        "inverse-primary": "#c8c6c5",
+                        "tertiary-fixed": "#e6e1df",
+                        "secondary": "#715a41",
+                        "tertiary-fixed-dim": "#cac6c3",
+                        "surface-container": "#f1edec",
+                        "on-secondary-fixed": "#281805",
+                        "surface-container-high": "#ebe7e6",
+                        "on-primary-fixed-variant": "#474646",
+                        "on-tertiary-fixed": "#1d1b1a",
+                        "error-container": "#ffdad6",
+                        "surface-container-highest": "#e5e2e1",
+                        "surface-dim": "#ddd9d8",
+                        "foreground": "#111111",
+                        "on-secondary": "#ffffff",
+                        "secondary-fixed": "#fdddbd",
+                        "tertiary": "#000000",
+                        "on-background": "#1c1b1b",
+                        "on-tertiary": "#ffffff",
+                        "primary": "#000000",
+                        "on-error-container": "#93000a",
+                        "tertiary-container": "#1d1b1a",
+                        "button-bg": "#111111",
+                        "on-surface": "#1c1b1b",
+                        "on-primary": "#ffffff",
+                        "secondary-fixed-dim": "#dfc1a2",
+                        "surface-variant": "#e5e2e1",
+                        "inverse-surface": "#313030",
+                        "surface-bright": "#fdf8f8",
+                        "background": "#FAF6F1",
+                        "muted": "#C8C0B8",
+                        "on-tertiary-container": "#868381"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "stack-gap": "16px",
+                        "section-py": "80px",
+                        "gutter": "24px",
+                        "container-padding": "40px"
+                    },
+                    "fontFamily": {
+                        "h3": ["notoSerif"],
+                        "h1": ["notoSerif"],
+                        "h2": ["notoSerif"],
+                        "nav-link": ["inter"],
+                        "body-md": ["inter"],
+                        "button-label": ["inter"],
+                        "hero": ["notoSerif"],
+                        "body-lg": ["inter"]
+                    },
+                    "fontSize": {
+                        "h3": ["28px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                        "h1": ["48px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                        "h2": ["36px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                        "nav-link": ["12px", {"lineHeight": "1", "letterSpacing": "0.15em", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "button-label": ["13px", {"lineHeight": "1", "letterSpacing": "0.1em", "fontWeight": "600"}],
+                        "hero": ["80px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .dot-grid {
+            background-image: radial-gradient(#C8C0B8 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+        .editorial-shadow {
+            box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.08);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md selection:bg-accent selection:text-white">
+<!-- TopNavBar -->
+<header class="fixed top-0 left-0 right-0 z-50 bg-background/90 backdrop-blur-md">
+<nav class="flex justify-between items-center w-full px-10 py-6 max-w-screen-2xl mx-auto">
+<div class="font-h2 text-h2 tracking-[0.15em] text-primary">ADONESS</div>
+<div class="flex items-center gap-6">
+<button class="text-primary active:opacity-70 transition-opacity">
+<span class="material-symbols-outlined" data-icon="search">search</span>
+</button>
+<button class="text-primary active:opacity-70 transition-opacity">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</button>
+</div>
+</nav>
+</header>
+<main class="relative pt-24 overflow-x-hidden">
+<!-- Hero Section -->
+<section class="relative px-10 pt-12 pb-20 dot-grid min-h-[70vh] flex flex-col justify-center">
+<div class="relative z-10 max-w-sm">
+<p class="font-nav-link text-nav-link text-accent uppercase mb-4 tracking-[0.2em]">Curation • Style • Design</p>
+<h1 class="font-h1 text-[42px] leading-tight text-primary mb-8">
+                    Transform your style, making everyday extraordinary.
+                </h1>
+<button class="w-full bg-button-bg text-button-text font-button-label text-button-label py-5 rounded-full uppercase transition-all duration-300 hover:bg-accent active:scale-95 shadow-lg">
+                    Discover Collection
+                </button>
+</div>
+</section>
+<!-- Staggered Content (Single Column Mobile Scroll) -->
+<section class="px-10 pb-section-py space-y-20">
+<!-- Feature Card 1 -->
+<div class="flex flex-col space-y-6">
+<div class="relative aspect-[4/5] rounded-xl overflow-hidden editorial-shadow">
+<img alt="Adoness Lifestyle" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida/ADBb0ugTaaONMlWN0cNjOWPMs7CcqXNL4q8e4HjWMoWBANgh_9lu9Mx0xLbGsofWu7XWlRJ1lxucSl0P7t6cuxTkAe63Agv7k-BdVokRrycKC2R6LaldnhWBPmQEM4ilvAJ44Ate6gXaGnYoUEYBZ5XVsjYJdzFpyRfJN1v5qI-IvJ1phhIr5_O1ejYb90xn4MJMMhNjnoSIY96mTdawn3mUeq8KiwS8LjfqI3jzE9zAFAbB3E4oUrp47IkAk5QA-V02JOt_zTn-eSsFmdQ"/>
+</div>
+<div class="space-y-3">
+<span class="font-nav-link text-nav-link text-on-surface-variant uppercase tracking-widest">Editorial — 01</span>
+<h2 class="font-h2 text-h2 text-primary">The Modern Aesthetic</h2>
+<p class="text-on-surface-variant font-body-md leading-relaxed">
+                        A curated selection of timeless silhouettes designed for the contemporary individual who values substance and form.
+                    </p>
+<a class="inline-block border-b border-primary pb-1 font-button-label text-button-label uppercase tracking-wider text-primary hover:text-accent hover:border-accent transition-colors" href="#">Learn More</a>
+</div>
+</div>
+<!-- Feature Card 2 -->
+<div class="flex flex-col space-y-6">
+<div class="relative aspect-square rounded-xl overflow-hidden editorial-shadow bg-surface-container-high">
+<div class="w-full h-full flex items-center justify-center p-8 bg-surface-container-highest" data-alt="A high-end editorial close-up of premium leather accessories resting on a textured cream surface. The lighting is soft and diffused, characteristic of a professional studio setup. The composition follows a minimalist, luxury fashion aesthetic with neutral tones of tan, beige, and charcoal. The overall mood is sophisticated, tactile, and serene, fitting a premium design portfolio." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAzSh70akj5BYzyJot4wKMHdUY3JYaxT9mQc-8nvMNPi4O3KXbbrl0RYSSJ3XqFG1VdT-gQlErXugKBtC09vYokzFDTkTZk97QFkWE5JcT3lwoIpIxOcivFZUq_wsk1BuuygYn9MzHpgwyMw6UDv1Qm623Zpip3JsZd_A8p1SXmFn9TmaCAykxrNae-paeJQpuFQ78G8Ifk7UbW734k0g96Ct-A54dMZwaiaT8P1Y_6dmBl7Oprk9p6faEtXx8t06llIHEEjkEf7LWa'); background-size: cover; background-position: center;">
+</div>
+</div>
+<div class="space-y-3">
+<span class="font-nav-link text-nav-link text-on-surface-variant uppercase tracking-widest">Craft — 02</span>
+<h2 class="font-h2 text-h2 text-primary">Artisanal Details</h2>
+<p class="text-on-surface-variant font-body-md leading-relaxed">
+                        Every piece in our Atelier is a testament to the enduring beauty of handcrafted excellence and mindful production.
+                    </p>
+<a class="inline-block border-b border-primary pb-1 font-button-label text-button-label uppercase tracking-wider text-primary hover:text-accent hover:border-accent transition-colors" href="#">View Atelier</a>
+</div>
+</div>
+<!-- Featured Quote Section -->
+<div class="py-12 border-y border-outline-variant/30 text-center">
+<p class="font-h3 text-h3 italic text-primary leading-snug">
+                    "Style is a way to say who you are without having to speak."
+                </p>
+<p class="mt-4 font-nav-link text-nav-link text-accent uppercase tracking-widest">— Rachel Zoe</p>
+</div>
+<!-- Feature Card 3 -->
+<div class="flex flex-col space-y-6">
+<div class="relative aspect-[3/4] rounded-xl overflow-hidden editorial-shadow">
+<div class="w-full h-full bg-primary-container flex items-end p-8" data-alt="A striking portrait of a model in a minimalist, sculptural outfit against a vast, neutral-toned architectural background. The scene is bathed in natural, directional sunlight that creates sharp, elegant shadows, emphasizing the texture of the fabric. The color palette is strictly limited to cream, sand, and deep black, reflecting a high-end fashion magazine aesthetic. The atmosphere is one of quiet confidence and timeless sophistication." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCU7rrR3ngWA0AUc9j1eaoWNgySAqE-S8l4btl7gpa7jM_xGUTu1YtFjm2qz1S6xqTd62XVk2UNBZTGJrK2-GL0PGTGGcZ7IZvXxzN8BcnA3ogZ5SZUq8HHV6_tm0khhvziOz31gOgyfFG6dS9rjpTjg7n5voqQkCTW-CyJWH72lvkQLRVGf1D-SUwVRQT2NqAorASkyFUqkLbrxGxkEFbfb_inHiC-Eo4CCAtC4K7Kp5zEJ3m_78JPwOMMoYt5EUHblusQh3KxOggs'); background-size: cover; background-position: center;">
+</div>
+</div>
+<div class="space-y-3">
+<span class="font-nav-link text-nav-link text-on-surface-variant uppercase tracking-widest">Vision — 03</span>
+<h2 class="font-h2 text-h2 text-primary">Bold Simplicity</h2>
+<p class="text-on-surface-variant font-body-md leading-relaxed">
+                        Exploring the intersection of architectural structure and fluid movement through our latest seasonal collection.
+                    </p>
+<a class="inline-block border-b border-primary pb-1 font-button-label text-button-label uppercase tracking-wider text-primary hover:text-accent hover:border-accent transition-colors" href="#">Explore Gallery</a>
+</div>
+</div>
+</section>
+<!-- Newsletter / Contact Teaser -->
+<section class="bg-surface-container-low px-10 py-section-py text-center">
+<h3 class="font-h2 text-h2 text-primary mb-4">Stay Inspired</h3>
+<p class="font-body-md text-on-surface-variant mb-8">Join our curated list for exclusive updates and design editorial insights.</p>
+<div class="flex flex-col gap-4">
+<input class="bg-transparent border-b border-outline text-center py-3 font-nav-link text-nav-link focus:border-primary focus:ring-0 uppercase tracking-widest" placeholder="YOUR EMAIL ADDRESS" type="email"/>
+<button class="w-full bg-primary text-on-primary font-button-label text-button-label py-5 rounded-full uppercase tracking-widest hover:bg-accent transition-all duration-300">Subscribe</button>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-low border-t border-outline-variant/30">
+<div class="flex flex-col items-center justify-center w-full px-10 py-section-py text-center">
+<div class="font-h2 text-h3 text-primary mb-4">ADONESS</div>
+<nav class="flex flex-wrap justify-center gap-x-6 gap-y-4 mb-10">
+<a class="font-nav-link text-nav-link text-on-surface-variant uppercase tracking-wider hover:text-accent transition-colors duration-300" href="#">PRIVACY POLICY</a>
+<a class="font-nav-link text-nav-link text-on-surface-variant uppercase tracking-wider hover:text-accent transition-colors duration-300" href="#">TERMS OF SERVICE</a>
+<a class="font-nav-link text-nav-link text-on-surface-variant uppercase tracking-wider hover:text-accent transition-colors duration-300" href="#">SHIPPING &amp; RETURNS</a>
+<a class="font-nav-link text-nav-link text-on-surface-variant uppercase tracking-wider hover:text-accent transition-colors duration-300" href="#">CONTACT</a>
+</nav>
+<div class="flex gap-8 mb-10">
+<a class="text-on-surface-variant hover:text-accent transition-colors" href="#"><span class="material-symbols-outlined" data-icon="share">share</span></a>
+<a class="text-on-surface-variant hover:text-accent transition-colors" href="#"><span class="material-symbols-outlined" data-icon="language">language</span></a>
+<a class="text-on-surface-variant hover:text-accent transition-colors" href="#"><span class="material-symbols-outlined" data-icon="mail">mail</span></a>
+</div>
+<p class="font-nav-link text-[10px] text-on-primary-container tracking-widest uppercase opacity-60">
+                © 2024 ADONESS DESIGN. ALL RIGHTS RESERVED.
+            </p>
+</div>
+</footer>
+</body></html>
