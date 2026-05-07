@@ -1,15 +1,247 @@
-import type { ReactElement } from "react";
+"use client";
+
+import { useEffect, useRef, useState } from "react";
+import type { FormEvent, ReactElement } from "react";
+import gsap from "gsap";
+
+interface ChatMessage {
+  id: string;
+  role: "user" | "bot";
+  text: string;
+  timestamp: string;
+}
+
+const INITIAL_MESSAGES: readonly ChatMessage[] = [
+  {
+    id: "m-1",
+    role: "bot",
+    text: "Good evening. How may I assist your experience with Adoness today?",
+    timestamp: "18:02",
+  },
+  {
+    id: "m-2",
+    role: "user",
+    text: "I'm looking for the Atelier collection's latest release dates.",
+    timestamp: "18:03",
+  },
+  {
+    id: "m-3",
+    role: "bot",
+    text: "The Atelier Spring/Summer collection is scheduled for early preview this Friday. Would you like to be added to the waitlist?",
+    timestamp: "18:03",
+  },
+];
+
+function formatTime(): string {
+  return new Date().toLocaleTimeString([], {
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: false,
+  });
+}
 
 export function Chatbot(): ReactElement {
+  const [open, setOpen] = useState<boolean>(false);
+  const [messages, setMessages] = useState<ChatMessage[]>([
+    ...INITIAL_MESSAGES,
+  ]);
+  const [input, setInput] = useState<string>("");
+
+  const containerRef = useRef<HTMLDivElement>(null);
+  const tlRef = useRef<gsap.core.Timeline | null>(null);
+  const messagesRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap.set(".chat-modal", {
+        autoAlpha: 0,
+        scale: 0.85,
+        y: 16,
+        transformOrigin: "bottom right",
+      });
+      gsap.set(".chat-header", { autoAlpha: 0, y: -8 });
+      gsap.set(".chat-message", { autoAlpha: 0, y: 12 });
+      gsap.set(".chat-input-bar", { autoAlpha: 0, y: 12 });
+
+      const tl = gsap.timeline({
+        paused: true,
+        defaults: { ease: "power3.out" },
+      });
+      tl.to(".chat-modal", {
+        autoAlpha: 1,
+        scale: 1,
+        y: 0,
+        duration: 0.45,
+      })
+        .to(
+          ".chat-header",
+          { autoAlpha: 1, y: 0, duration: 0.35 },
+          "-=0.2"
+        )
+        .to(
+          ".chat-message",
+          { autoAlpha: 1, y: 0, duration: 0.4, stagger: 0.07 },
+          "-=0.25"
+        )
+        .to(
+          ".chat-input-bar",
+          { autoAlpha: 1, y: 0, duration: 0.35 },
+          "-=0.3"
+        );
+
+      tlRef.current = tl;
+    }, containerRef);
+    return () => ctx.revert();
+  }, []);
+
+  useEffect(() => {
+    const tl = tlRef.current;
+    if (!tl) return;
+    if (open) tl.timeScale(1).play();
+    else tl.timeScale(1.4).reverse();
+  }, [open]);
+
+  useEffect(() => {
+    const el = messagesRef.current;
+    if (!el || !open) return;
+    el.scrollTo({ top: el.scrollHeight, behavior: "smooth" });
+  }, [messages, open]);
+
+  useEffect(() => {
+    if (!open) return undefined;
+    const onKey = (event: KeyboardEvent): void => {
+      if (event.key === "Escape") setOpen(false);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [open]);
+
+  const handleSend = (event: FormEvent<HTMLFormElement>): void => {
+    event.preventDefault();
+    const text = input.trim();
+    if (!text) return;
+    const next: ChatMessage = {
+      id: `u-${Date.now()}`,
+      role: "user",
+      text,
+      timestamp: formatTime(),
+    };
+    setMessages((prev) => [...prev, next]);
+    setInput("");
+  };
+
   return (
-    <div className="fixed bottom-6 right-6 md:bottom-8 md:right-8 z-[100]">
+    <div
+      ref={containerRef}
+      className="fixed bottom-6 right-6 z-[100] flex flex-col items-end gap-4 md:bottom-8 md:right-8"
+    >
+      <div
+        role="dialog"
+        aria-label="Adoness Assistant"
+        aria-hidden={!open}
+        className="chat-modal invisible flex w-[min(92vw,400px)] flex-col overflow-hidden rounded-2xl border border-muted/30 bg-background opacity-0 shadow-[0_24px_60px_-15px_rgba(17,17,17,0.35)]"
+      >
+        <div className="chat-header flex items-center justify-between bg-foreground px-5 py-4 text-background">
+          <div className="flex items-center gap-3">
+            <span className="relative flex h-2.5 w-2.5">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-70" />
+              <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-accent" />
+            </span>
+            <span className="text-[11px] font-semibold uppercase tracking-[0.25em]">
+              Adoness Assistant
+            </span>
+          </div>
+          <button
+            type="button"
+            aria-label="Close assistant"
+            onClick={() => setOpen(false)}
+            className="text-background/70 transition-colors hover:text-background"
+          >
+            <CloseIcon />
+          </button>
+        </div>
+
+        <div
+          ref={messagesRef}
+          className="flex max-h-[420px] min-h-[280px] flex-col gap-4 overflow-y-auto scroll-smooth px-5 py-5"
+        >
+          {messages.map((message) => (
+            <ChatBubble key={message.id} message={message} />
+          ))}
+        </div>
+
+        <form
+          onSubmit={handleSend}
+          className="chat-input-bar border-t border-muted/30 bg-background/80 p-4"
+        >
+          <div className="relative flex items-center">
+            <label htmlFor="chat-input" className="sr-only">
+              Type your message
+            </label>
+            <input
+              id="chat-input"
+              type="text"
+              value={input}
+              onChange={(event) => setInput(event.target.value)}
+              placeholder="Inquire here..."
+              className="w-full rounded-full border border-muted/40 bg-surface py-3 pl-5 pr-14 text-sm text-foreground placeholder:text-foreground/40 focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20"
+            />
+            <button
+              type="submit"
+              aria-label="Send message"
+              className="absolute right-1.5 flex h-10 w-10 items-center justify-center rounded-full bg-foreground text-background transition-colors hover:bg-accent"
+            >
+              <SendIcon />
+            </button>
+          </div>
+        </form>
+      </div>
+
       <button
         type="button"
-        aria-label="Open Adoness Assistant"
-        className="flex h-14 w-14 md:h-16 md:w-16 items-center justify-center rounded-full bg-foreground text-background shadow-2xl transition-all duration-300 hover:bg-accent hover:scale-105 active:scale-95"
+        aria-label={open ? "Close Adoness Assistant" : "Open Adoness Assistant"}
+        aria-expanded={open}
+        onClick={() => setOpen((value) => !value)}
+        className="relative flex h-14 w-14 items-center justify-center rounded-full bg-foreground text-background shadow-2xl transition-all duration-300 hover:scale-105 hover:bg-accent active:scale-95 md:h-16 md:w-16"
       >
-        <ChatIcon />
+        {!open && (
+          <span
+            aria-hidden
+            className="absolute inset-0 animate-ping rounded-full bg-accent/30"
+          />
+        )}
+        <span className="relative">
+          {open ? <CloseIcon /> : <ChatIcon />}
+        </span>
       </button>
+    </div>
+  );
+}
+
+function ChatBubble({ message }: { message: ChatMessage }): ReactElement {
+  const isUser = message.role === "user";
+  return (
+    <div
+      className={`chat-message flex max-w-[85%] flex-col ${
+        isUser ? "items-end self-end" : "items-start self-start"
+      }`}
+    >
+      <div
+        className={`px-4 py-3 text-sm leading-relaxed shadow-sm ${
+          isUser
+            ? "rounded-2xl rounded-tr-sm bg-foreground text-background"
+            : "rounded-2xl rounded-tl-sm bg-muted/30 text-foreground"
+        }`}
+      >
+        {message.text}
+      </div>
+      <span
+        className={`mt-1 text-[10px] uppercase tracking-[0.2em] text-foreground/40 ${
+          isUser ? "mr-2" : "ml-2"
+        }`}
+      >
+        {isUser ? "You" : "Assistant"} · {message.timestamp}
+      </span>
     </div>
   );
 }
@@ -24,6 +256,44 @@ function ChatIcon(): ReactElement {
       aria-hidden
     >
       <path d="M4 4h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H8l-4 4V6a2 2 0 0 1 2-2Z" />
+    </svg>
+  );
+}
+
+function CloseIcon(): ReactElement {
+  return (
+    <svg
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden
+    >
+      <line x1="6" y1="6" x2="18" y2="18" />
+      <line x1="18" y1="6" x2="6" y2="18" />
+    </svg>
+  );
+}
+
+function SendIcon(): ReactElement {
+  return (
+    <svg
+      width="18"
+      height="18"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden
+    >
+      <line x1="22" y1="2" x2="11" y2="13" />
+      <polygon points="22 2 15 22 11 13 2 9 22 2" />
     </svg>
   );
 }
