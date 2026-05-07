@@ -39,38 +39,39 @@ Define all of these as CSS variables in `globals.css` and reference them via Tai
 ---
 
 ## Folder Structure
+Project uses root-level App Router (no `src/` directory). Path alias `@/*` resolves from project root.
+
 ```
-src/
-  app/                    → Next.js App Router pages
-    page.tsx              → Home
-    about/page.tsx
-    collections/page.tsx
-    admin/
-        post/page.tsx           → Upload form (client component)
-    category/page.tsx
-    new-arrivals/page.tsx      → Fetches and displays items (server component)
-    contact/page.tsx
-    item/[slug]/page.tsx  → Single product/item detail page
-    layout.tsx            → Root layout with Navbar + Footer + Chatbot
-  components/
-    ui/                   → Reusable primitives (Button, Badge, Card, etc.)
-    layout/               → Navbar, Footer
-    sections/             → Page-level sections (Hero, CollectionGrid, etc.)
-      ArrivalCard.tsx         → Card component for each new arrival item
-    chatbot/              → Chatbot modal component
-    admin/
-        PostForm.tsx            → The upload form component
-  lib/
-    axios.ts              → Axios instance with base URL configured
-    chatbot.ts            → Chatbot API call helper
-    supabase.ts               → Supabase client instance
-    cloudinary.ts             → Cloudinary upload helper (if used)
-    gsap/                 → GSAP animation utilities and hooks
-  hooks/                  → Custom React hooks
-  types/                  → TypeScript interfaces and types
-    arrival.ts                → TypeScript interface for ArrivalItem
-  styles/
-    globals.css           → CSS variables, base styles
+app/                      → Next.js App Router pages
+  page.tsx                → Home
+  globals.css             → Tailwind v4 @theme tokens, base styles
+  layout.tsx              → Root layout with Navbar + Footer + Chatbot
+  about/page.tsx
+  collections/page.tsx
+  category/page.tsx
+  new-arrivals/page.tsx   → Server component, fetches arrivals from Supabase
+  contact/page.tsx
+  item/[slug]/page.tsx    → Single product/item detail page
+  admin/
+    post/page.tsx         → Upload form (client component)
+components/
+  ui/                     → Reusable primitives (Button, Container, Card, etc.)
+  layout/                 → Navbar, Footer
+  sections/               → Page-level sections (Hero, CollectionGrid, etc.)
+    ArrivalCard.tsx       → Card component for each new arrival item
+  chatbot/                → Chatbot trigger + modal
+  admin/
+    PostForm.tsx          → The upload form component
+lib/
+  axios.ts                → Axios instance with base URL configured
+  chatbot.ts              → Chatbot API call helper
+  supabase.ts             → Supabase client instance
+  cloudinary.ts           → Cloudinary upload helper (if used)
+  gsap/                   → GSAP animation utilities and hooks
+hooks/                    → Custom React hooks
+types/                    → TypeScript interfaces and types
+  arrival.ts              → TypeScript interface for ArrivalItem
+public/                   → Static assets
 design/                   → Figma exports, screenshots, reference images (DO NOT modify)
 ```
 
