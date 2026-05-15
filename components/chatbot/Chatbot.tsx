@@ -46,6 +46,7 @@ export function Chatbot(): ReactElement {
     ...INITIAL_MESSAGES,
   ]);
   const [input, setInput] = useState<string>("");
+  const [sending, setSending] = useState<boolean>(false);
 
   const containerRef = useRef<HTMLDivElement>(null);
   const tlRef = useRef<gsap.core.Timeline | null>(null);
@@ -105,7 +106,7 @@ export function Chatbot(): ReactElement {
     const el = messagesRef.current;
     if (!el || !open) return;
     el.scrollTo({ top: el.scrollHeight, behavior: "smooth" });
-  }, [messages, open]);
+  }, [messages, open, sending]);
 
   useEffect(() => {
     if (!open) return undefined;
@@ -116,18 +117,34 @@ export function Chatbot(): ReactElement {
     return () => window.removeEventListener("keydown", onKey);
   }, [open]);
 
-  const handleSend = (event: FormEvent<HTMLFormElement>): void => {
+  const handleSend = async (
+    event: FormEvent<HTMLFormElement>
+  ): Promise<void> => {
     event.preventDefault();
     const text = input.trim();
-    if (!text) return;
-    const next: ChatMessage = {
+    if (!text || sending) return;
+
+    const userMessage: ChatMessage = {
       id: `u-${Date.now()}`,
       role: "user",
       text,
       timestamp: formatTime(),
     };
-    setMessages((prev) => [...prev, next]);
+    setMessages((prev) => [...prev, userMessage]);
     setInput("");
+    setSending(true);
+
+    // Placeholder for the n8n webhook call; swap with the real request when ready.
+    await new Promise((resolve) => setTimeout(resolve, 900));
+
+    const botReply: ChatMessage = {
+      id: `b-${Date.now()}`,
+      role: "bot",
+      text: "Thank you — a stylist will follow up shortly with curated details.",
+      timestamp: formatTime(),
+    };
+    setMessages((prev) => [...prev, botReply]);
+    setSending(false);
   };
 
   return (
@@ -168,6 +185,7 @@ export function Chatbot(): ReactElement {
           {messages.map((message) => (
             <ChatBubble key={message.id} message={message} />
           ))}
+          {sending ? <TypingBubble /> : null}
         </div>
 
         <form
@@ -184,14 +202,17 @@ export function Chatbot(): ReactElement {
               value={input}
               onChange={(event) => setInput(event.target.value)}
               placeholder="Inquire here..."
-              className="w-full rounded-full border border-muted/40 bg-surface py-3 pl-5 pr-14 text-sm text-foreground placeholder:text-foreground/40 focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20"
+              disabled={sending}
+              className="w-full rounded-full border border-muted/40 bg-surface py-3 pl-5 pr-14 text-sm text-foreground placeholder:text-foreground/40 focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20 disabled:cursor-not-allowed disabled:opacity-60"
             />
             <button
               type="submit"
-              aria-label="Send message"
-              className="absolute right-1.5 flex h-10 w-10 items-center justify-center rounded-full bg-foreground text-background transition-colors hover:bg-accent"
+              aria-label={sending ? "Sending message" : "Send message"}
+              aria-busy={sending}
+              disabled={sending || input.trim().length === 0}
+              className="absolute right-1.5 flex h-10 w-10 items-center justify-center rounded-full bg-foreground text-background transition-colors hover:bg-accent disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:bg-foreground"
             >
-              <SendIcon />
+              {sending ? <Spinner /> : <SendIcon />}
             </button>
           </div>
         </form>
@@ -243,6 +264,39 @@ function ChatBubble({ message }: { message: ChatMessage }): ReactElement {
         {isUser ? "You" : "Assistant"} · {message.timestamp}
       </span>
     </div>
+  );
+}
+
+function TypingBubble(): ReactElement {
+  return (
+    <div className="chat-message flex max-w-[85%] flex-col items-start self-start">
+      <div className="flex items-center gap-1.5 rounded-2xl rounded-tl-sm bg-muted/30 px-4 py-3 shadow-sm">
+        <span className="block h-1.5 w-1.5 animate-bounce rounded-full bg-foreground/50 [animation-delay:-0.3s]" />
+        <span className="block h-1.5 w-1.5 animate-bounce rounded-full bg-foreground/50 [animation-delay:-0.15s]" />
+        <span className="block h-1.5 w-1.5 animate-bounce rounded-full bg-foreground/50" />
+      </div>
+      <span className="mt-1 ml-2 text-[10px] uppercase tracking-[0.2em] text-foreground/40">
+        Assistant · typing
+      </span>
+    </div>
+  );
+}
+
+function Spinner(): ReactElement {
+  return (
+    <svg
+      width="18"
+      height="18"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      className="animate-spin"
+      aria-hidden
+    >
+      <path d="M21 12a9 9 0 1 1-6.219-8.56" />
+    </svg>
   );
 }
 

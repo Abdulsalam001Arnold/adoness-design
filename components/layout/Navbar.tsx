@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import type { ReactElement } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import gsap from "gsap";
 
 interface NavLink {
@@ -18,8 +19,15 @@ const NAV_LINKS: readonly NavLink[] = [
   { label: "Contact", href: "/contact" },
 ] as const;
 
+function isActivePath(pathname: string | null, href: string): boolean {
+  if (!pathname) return false;
+  if (href === "/") return pathname === "/";
+  return pathname === href || pathname.startsWith(`${href}/`);
+}
+
 export function Navbar(): ReactElement {
   const [open, setOpen] = useState(false);
+  const pathname = usePathname();
   const drawerRootRef = useRef<HTMLDivElement>(null);
   const tlRef = useRef<gsap.core.Timeline | null>(null);
 
@@ -99,16 +107,28 @@ export function Navbar(): ReactElement {
       <header className="fixed inset-x-0 top-0 z-50 bg-background/85 backdrop-blur-md">
         <nav className="mx-auto flex w-full max-w-screen-2xl items-center justify-between px-6 py-5 sm:px-10 md:py-6">
           <ul className="hidden flex-1 items-center gap-8 md:flex lg:gap-10">
-            {NAV_LINKS.map((link) => (
-              <li key={link.href}>
-                <Link
-                  href={link.href}
-                  className="text-[11px] font-semibold uppercase tracking-[0.2em] text-foreground transition-colors duration-300 hover:text-accent"
-                >
-                  {link.label}
-                </Link>
-              </li>
-            ))}
+            {NAV_LINKS.map((link) => {
+              const active = isActivePath(pathname, link.href);
+              return (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    aria-current={active ? "page" : undefined}
+                    className={`group relative text-[11px] font-semibold uppercase tracking-[0.2em] transition-colors duration-300 hover:text-accent ${
+                      active ? "text-accent" : "text-foreground"
+                    }`}
+                  >
+                    {link.label}
+                    <span
+                      aria-hidden
+                      className={`pointer-events-none absolute -bottom-1.5 left-1/2 h-px -translate-x-1/2 bg-accent transition-all duration-300 ${
+                        active ? "w-6" : "w-0 group-hover:w-4"
+                      }`}
+                    />
+                  </Link>
+                </li>
+              );
+            })}
           </ul>
 
           <div className="flex flex-1 justify-start md:justify-center">
@@ -182,17 +202,29 @@ export function Navbar(): ReactElement {
 
             <nav className="mt-16 flex-1">
               <ul className="space-y-7">
-                {NAV_LINKS.map((link) => (
-                  <li key={link.href} className="mobile-menu-link">
-                    <Link
-                      href={link.href}
-                      onClick={() => setOpen(false)}
-                      className="font-serif text-3xl font-semibold text-foreground transition-colors duration-300 hover:text-accent"
-                    >
-                      {link.label}
-                    </Link>
-                  </li>
-                ))}
+                {NAV_LINKS.map((link) => {
+                  const active = isActivePath(pathname, link.href);
+                  return (
+                    <li key={link.href} className="mobile-menu-link">
+                      <Link
+                        href={link.href}
+                        onClick={() => setOpen(false)}
+                        aria-current={active ? "page" : undefined}
+                        className={`flex items-center gap-3 font-serif text-3xl font-semibold transition-colors duration-300 hover:text-accent ${
+                          active ? "text-accent" : "text-foreground"
+                        }`}
+                      >
+                        <span
+                          aria-hidden
+                          className={`inline-block h-px bg-accent transition-all duration-300 ${
+                            active ? "w-6 opacity-100" : "w-0 opacity-0"
+                          }`}
+                        />
+                        {link.label}
+                      </Link>
+                    </li>
+                  );
+                })}
               </ul>
             </nav>
 

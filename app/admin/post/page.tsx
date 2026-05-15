@@ -1,14 +1,22 @@
 import type { Metadata } from "next";
 import type { ReactElement } from "react";
+import { cookies } from "next/headers";
 import { Container } from "@/components/ui/Container";
 import { PostForm } from "@/components/admin/PostForm";
+import { ADMIN_COOKIE, isPinValid } from "@/lib/admin-auth";
 
 export const metadata: Metadata = {
   title: "Post a New Arrival — Adoness Studio",
   robots: { index: false, follow: false },
 };
 
-export default function AdminPostPage(): ReactElement {
+export const dynamic = "force-dynamic";
+
+export default async function AdminPostPage(): Promise<ReactElement> {
+  const store = await cookies();
+  const cookieValue = store.get(ADMIN_COOKIE)?.value ?? null;
+  const initiallyUnlocked = isPinValid(cookieValue);
+
   return (
     <section className="relative pt-28 pb-24 md:pt-36 md:pb-32">
       <span
@@ -30,7 +38,7 @@ export default function AdminPostPage(): ReactElement {
             </p>
           </div>
 
-          <PostForm />
+          <PostForm initiallyUnlocked={initiallyUnlocked} />
         </div>
       </Container>
     </section>

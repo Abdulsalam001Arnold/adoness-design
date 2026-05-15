@@ -12,6 +12,7 @@ gsap.registerPlugin(ScrollTrigger);
 export function Newsletter(): ReactElement {
   const rootRef = useRef<HTMLElement>(null);
   const [email, setEmail] = useState<string>("");
+  const [submitting, setSubmitting] = useState<boolean>(false);
   const [submitted, setSubmitted] = useState<boolean>(false);
 
   useEffect(() => {
@@ -48,9 +49,15 @@ export function Newsletter(): ReactElement {
     return () => ctx.revert();
   }, []);
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>): void => {
+  const handleSubmit = async (
+    event: FormEvent<HTMLFormElement>
+  ): Promise<void> => {
     event.preventDefault();
-    if (!email.trim()) return;
+    if (!email.trim() || submitting) return;
+    setSubmitting(true);
+    // Placeholder for the subscribe endpoint — swap with the real call when wired.
+    await new Promise((resolve) => setTimeout(resolve, 700));
+    setSubmitting(false);
     setSubmitted(true);
   };
 
@@ -92,10 +99,16 @@ export function Newsletter(): ReactElement {
               placeholder="YOUR EMAIL ADDRESS"
               value={email}
               onChange={(event) => setEmail(event.target.value)}
-              className="flex-1 rounded-full border border-muted/60 bg-surface px-6 py-4 text-[12px] uppercase tracking-[0.2em] text-foreground placeholder:text-foreground/40 focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20"
+              disabled={submitting}
+              className="flex-1 rounded-full border border-muted/60 bg-surface px-6 py-4 text-[12px] uppercase tracking-[0.2em] text-foreground placeholder:text-foreground/40 focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20 disabled:cursor-not-allowed disabled:opacity-60"
             />
-            <Button type="submit" size="md">
-              Subscribe
+            <Button
+              type="submit"
+              size="md"
+              disabled={submitting}
+              aria-busy={submitting}
+            >
+              {submitting ? "Subscribing…" : "Subscribe"}
             </Button>
           </form>
         )}

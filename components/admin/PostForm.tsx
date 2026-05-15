@@ -15,9 +15,12 @@ import {
   type ArrivalItem,
 } from "@/types/arrival";
 
-const PIN_STORAGE_KEY = "adoness:admin-pin";
 const MAX_FILE_BYTES = 10 * 1024 * 1024;
 const ACCEPTED_TYPES = ["image/jpeg", "image/png", "image/webp", "image/avif"];
+
+interface PostFormProps {
+  initiallyUnlocked: boolean;
+}
 
 interface FormState {
   name: string;
@@ -52,16 +55,12 @@ type Status =
   | { kind: "success"; item: ArrivalItem }
   | { kind: "error"; message: string };
 
-function readStoredPin(): string {
-  if (typeof window === "undefined") return "";
-  return window.sessionStorage.getItem(PIN_STORAGE_KEY) ?? "";
-}
-
-export function PostForm(): ReactElement {
-  const [pin, setPin] = useState<string>(() => readStoredPin());
-  const [unlocked, setUnlocked] = useState<boolean>(
-    () => readStoredPin().length > 0
-  );
+export function PostForm({ initiallyUnlocked }: PostFormProps): ReactElement {
+  const [pin, setPin] = useState<string>("");
+  const [unlocked, setUnlocked] = useState<boolean>(initiallyUnlocked);
+  const [unlocking, setUnlocking] = useState<boolean>(false);
+  const [unlockError, setUnlockError] = useState<string | null>(null);
+  const [locking, setLocking] = useState<boolean>(false);
   const [form, setForm] = useState<FormState>(INITIAL_FORM);
   const [fileState, setFileState] = useState<{
     file: File;
@@ -82,18 +81,62 @@ export function PostForm(): ReactElement {
     });
   };
 
-  const handleUnlock = (event: FormEvent<HTMLFormElement>): void => {
+  const handleUnlock = async (
+    event: FormEvent<HTMLFormElement>
+  ): Promise<void> => {
     event.preventDefault();
-    if (pin.trim().length === 0) return;
-    window.sessionStorage.setItem(PIN_STORAGE_KEY, pin);
-    setUnlocked(true);
+    const candidate = pin.trim();
+    if (candidate.length === 0 || unlocking) return;
+
+    setUnlocking(true);
+    setUnlockError(null);
+
+    try {
+      const response = await fetch("/api/admin/unlock", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ pin: candidate }),
+      });
+
+      if (response.status === 401) {
+        setUnlockError("Incorrect PIN. Try again.");
+        setPin("");
+        return;
+      }
+
+      if (!response.ok) {
+        const payload = (await response.json().catch(() => null)) as
+          | { error?: string }
+          | null;
+        setUnlockError(
+          payload?.error ?? `Sign-in failed (${response.status}).`
+        );
+        return;
+      }
+
+      setPin("");
+      setUnlocked(true);
+    } catch {
+      setUnlockError("Network error. Please try again.");
+    } finally {
+      setUnlocking(false);
+    }
   };
 
-  const handleLock = (): void => {
-    window.sessionStorage.removeItem(PIN_STORAGE_KEY);
-    setPin("");
-    setUnlocked(false);
-    setStatus({ kind: "idle" });
+  const handleLock = async (): Promise<void> => {
+    if (locking) return;
+    setLocking(true);
+    try {
+      await fetch("/api/admin/lock", { method: "POST" });
+    } catch {
+      // Even if the network blip prevents the server response, clear local
+      // state so the UI re-gates immediately; the cookie expires on its own.
+    } finally {
+      setPin("");
+      setUnlocked(false);
+      setStatus({ kind: "idle" });
+      setLocking(false);
+    }
   };
 
   const updateField = <K extends keyof FormState>(
@@ -144,10 +187,7 @@ export function PostForm(): ReactElement {
   };
 
   const fetchSignature = async (): Promise<CloudinarySignaturePayload> => {
-    const response = await fetch("/api/upload-sign", {
-      method: "POST",
-      headers: { "x-admin-pin": pin },
-    });
+    const response = await fetch("/api/upload-sign", { method: "POST" });
     const payload = (await response.json()) as
       | CloudinarySignaturePayload
       | { error: string };
@@ -156,7 +196,7 @@ export function PostForm(): ReactElement {
         "error" in payload ? payload.error : `Sign request failed (${response.status}).`;
       if (response.status === 401) {
         setUnlocked(false);
-        window.sessionStorage.removeItem(PIN_STORAGE_KEY);
+        setUnlockError("Your session expired. Please sign in again.");
       }
       throw new Error(message);
     }
@@ -248,10 +288,7 @@ export function PostForm(): ReactElement {
       setStatus({ kind: "saving" });
       const response = await fetch("/api/arrivals", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "x-admin-pin": pin,
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           name: form.name.trim(),
           category: form.category,
@@ -270,7 +307,7 @@ export function PostForm(): ReactElement {
           "error" in payload ? payload.error : `Request failed (${response.status}).`;
         if (response.status === 401) {
           setUnlocked(false);
-          window.sessionStorage.removeItem(PIN_STORAGE_KEY);
+          setUnlockError("Your session expired. Please sign in again.");
         }
         setStatus({ kind: "error", message });
         return;
@@ -317,16 +354,33 @@ export function PostForm(): ReactElement {
             type="password"
             autoComplete="current-password"
             value={pin}
-            onChange={(event: ChangeEvent<HTMLInputElement>) =>
-              setPin(event.target.value)
-            }
-            className="rounded-full border border-muted/60 bg-background px-6 py-3.5 text-sm tracking-[0.1em] text-foreground placeholder:text-foreground/40 focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20"
+            onChange={(event: ChangeEvent<HTMLInputElement>) => {
+              setPin(event.target.value);
+              if (unlockError) setUnlockError(null);
+            }}
+            disabled={unlocking}
+            className="rounded-full border border-muted/60 bg-background px-6 py-3.5 text-sm tracking-[0.1em] text-foreground placeholder:text-foreground/40 focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20 disabled:cursor-not-allowed disabled:opacity-60"
             placeholder="••••••"
             required
           />
         </label>
-        <Button type="submit" size="md" className="self-start">
-          Unlock
+        {unlockError ? (
+          <p
+            role="alert"
+            aria-live="polite"
+            className="text-sm leading-relaxed text-red-700"
+          >
+            {unlockError}
+          </p>
+        ) : null}
+        <Button
+          type="submit"
+          size="md"
+          className="self-start"
+          disabled={unlocking || pin.trim().length === 0}
+          aria-busy={unlocking}
+        >
+          {unlocking ? "Verifying…" : "Unlock"}
         </Button>
       </form>
     );
@@ -356,9 +410,11 @@ export function PostForm(): ReactElement {
         <button
           type="button"
           onClick={handleLock}
-          className="text-[11px] font-semibold uppercase tracking-[0.25em] text-foreground/50 transition-colors hover:text-accent"
+          disabled={locking}
+          aria-busy={locking}
+          className="text-[11px] font-semibold uppercase tracking-[0.25em] text-foreground/50 transition-colors hover:text-accent disabled:cursor-not-allowed disabled:opacity-60"
         >
-          Lock
+          {locking ? "Locking…" : "Lock"}
         </button>
       </div>
 
