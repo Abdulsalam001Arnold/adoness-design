@@ -3,6 +3,7 @@ import type { ReactElement } from "react";
 import { AboutHero } from "@/components/sections/AboutHero";
 import { AboutProcess } from "@/components/sections/AboutProcess";
 import { AboutCTA } from "@/components/sections/AboutCTA";
+import { AboutFounder } from "@/components/sections/AboutFounder";
 
 export const metadata: Metadata = {
   title: "About — Adoness",
@@ -14,6 +15,7 @@ export default function AboutPage(): ReactElement {
   return (
     <>
       <AboutHero />
+      <AboutFounder />
       <AboutProcess />
       <AboutCTA />
     </>
