@@ -1,4 +1,7 @@
+"use client";
+
 import type { ButtonHTMLAttributes, ReactElement, ReactNode } from "react";
+import { useGsapHover } from "@/lib/gsap/useGsapHover";
 
 type ButtonVariant = "primary" | "outline" | "ghost";
 type ButtonSize = "sm" | "md" | "lg";
@@ -11,9 +14,9 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 
 const variantClasses: Record<ButtonVariant, string> = {
   primary:
-    "bg-foreground text-background hover:bg-accent transition-colors duration-300",
+    "bg-accent text-surface hover:opacity-90 transition-opacity duration-300",
   outline:
-    "border border-foreground text-foreground hover:bg-foreground hover:text-background transition-colors duration-300",
+    "border border-accent text-accent hover:bg-accent hover:text-surface transition-colors duration-300",
   ghost: "text-foreground hover:text-accent transition-colors duration-300",
 };
 
@@ -31,8 +34,11 @@ export function Button({
   children,
   ...rest
 }: ButtonProps): ReactElement {
+  const hoverRef = useGsapHover<HTMLButtonElement>(1.04, 0, 0.3);
+
   return (
     <button
+      ref={hoverRef}
       type={type}
       className={`inline-flex items-center justify-center rounded-full font-semibold uppercase tracking-[0.15em] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent disabled:opacity-50 disabled:cursor-not-allowed ${variantClasses[variant]} ${sizeClasses[size]} ${className}`.trim()}
       {...rest}

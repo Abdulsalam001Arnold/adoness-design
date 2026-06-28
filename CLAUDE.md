@@ -2,7 +2,7 @@
 
 ## What This Project Is
 A premium Afrocentric fashion designer's portfolio and showcase website for client Adoness 
-(Bidemi Odusi). Displays collections, categories, and new arrivals, includes an n8n-powered AI 
+(Bidemi Odusi). Displays collections, categories, and new arrivals, includes an AI 
 chatbot, a fabric makeover request form, and a fabric art video showcase. 
 Goal: premium Afrocentric editorial fashion brand — warm, cultural, elegant, animated, optimised.
 
@@ -23,6 +23,8 @@ Each phase section below is tagged. Only build Phase 2+ when explicitly instruct
 - **Language:** TypeScript (strict — no `any` ever)
 - **Animation:** GSAP (selective, elegant, performance-conscious)
 - **HTTP Client:** Axios (chatbot + client-side calls)
+- **AI Chatbot:** Vercel AI SDK (`ai` package) with OpenAI provider, streaming
+- **Email:** Resend (lead capture, contact form, makeover requests → Bidemi's inbox)
 - **Database:** Supabase (Phase 2)
 - **Storage:** Supabase Storage (Phase 2)
 - **Design Reference:** /design folder (READ ONLY)
@@ -128,7 +130,7 @@ design/                       → Client references — READ ONLY
 - Home page: hero with scattered product layout, featured sections, paintbrush dividers
 - About page: her portrait centred, working photos in staggered grid
 - Contact page: form UI (no backend yet) + social links
-- Chatbot UI fully built and wired to n8n webhook
+- Chatbot UI fully built and wired to vercel ai sdk with resend
 - ALL animations per DESIGN.md (hero load sequence, scroll reveals, hover)
 - ArrivalCard component built as a SHELL — accepts props, displays correctly,
   but fed with placeholder/mock data in Phase 1 (real data comes Phase 2)
@@ -259,7 +261,7 @@ Video embeds (YouTube or direct), thumbnail grid, branded layout.
 ---
 
 ## Chatbot Integration [P1]
-- n8n webhook via Axios POST, floats fixed bottom-right
+- Vercel AI SDK + OpenAI streaming, floats fixed bottom-right
 - Trigger: pink circular button. Modal: cream bg, dark header, pink send
 - NOT WhatsApp — custom AI chatbot
 Request:

@@ -2,11 +2,13 @@
 
 import { useEffect, useRef } from "react";
 import type { ReactElement } from "react";
-import Image from "next/image";
+import Image, { StaticImageData } from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Container } from "@/components/ui/Container";
-
+import image1 from "@/public/adoness and works/image-1.jpeg"
+import image2 from "@/public/adoness and works/image-2.jpeg"
+import image3 from "@/public/adoness and works/image-3.jpeg"
 gsap.registerPlugin(ScrollTrigger);
 
 interface ProcessStep {
@@ -14,7 +16,7 @@ interface ProcessStep {
   eyebrow: string;
   title: string;
   body: string;
-  image: string;
+  image: string | StaticImageData;
   offsetClass: string;
 }
 
@@ -24,7 +26,7 @@ const STEPS: readonly ProcessStep[] = [
     eyebrow: "Conceptualization",
     title: "Curated Concept",
     body: "Every collection begins with a narrative. We curate moods, textures, and silhouettes — drawing inspiration from architecture and classic tailoring before the first sketch is drawn.",
-    image: "https://picsum.photos/seed/adoness-process-1/720/900",
+    image: image1,
     offsetClass: "",
   },
   {
@@ -32,7 +34,7 @@ const STEPS: readonly ProcessStep[] = [
     eyebrow: "Craftsmanship",
     title: "Artisan Precision",
     body: "We partner with heritage mills and skilled artisans who treat material with reverence. Each piece is hand-finished to ensure a unique, human touch in every detail.",
-    image: "https://picsum.photos/seed/adoness-process-2/720/900",
+    image: image2,
     offsetClass: "md:mt-16",
   },
   {
@@ -40,7 +42,7 @@ const STEPS: readonly ProcessStep[] = [
     eyebrow: "Curation",
     title: "Spatial Harmony",
     body: "Final construction takes place in our dedicated atelier, where master craftsmen hand-finish every detail — bringing balance and quiet luxury to your wardrobe.",
-    image: "https://picsum.photos/seed/adoness-process-3/720/900",
+    image: image3,
     offsetClass: "",
   },
 ];

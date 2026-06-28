@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
-import { Inter, Noto_Serif } from "next/font/google";
+import { Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+import { AnimatedBackground } from "@/components/layout/AnimatedBackground";
 import { Chatbot } from "@/components/chatbot/Chatbot";
 
 const inter = Inter({
@@ -11,10 +12,10 @@ const inter = Inter({
   weight: ["400", "500", "600", "700"],
 });
 
-const notoSerif = Noto_Serif({
-  variable: "--font-noto-serif",
+const playfair = Playfair_Display({
+  variable: "--font-playfair",
   subsets: ["latin"],
-  weight: ["400", "600", "700"],
+  weight: ["400", "500", "600", "700", "800", "900"],
 });
 
 export const metadata: Metadata = {
@@ -29,13 +30,16 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${notoSerif.variable}`}
+      className={`${inter.variable} ${playfair.variable}`}
       suppressHydrationWarning
     >
-      <body className="min-h-screen flex flex-col bg-background text-foreground font-sans">
-        <Navbar />
-        <main className="flex-1">{children}</main>
-        <Footer />
+      <body className="min-h-screen flex flex-col text-foreground font-sans">
+        <AnimatedBackground />
+        <div className="relative z-10 flex min-h-screen flex-col">
+          <Navbar />
+          <main className="flex-1">{children}</main>
+          <Footer />
+        </div>
         <Chatbot />
       </body>
     </html>

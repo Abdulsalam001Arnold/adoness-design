@@ -2,51 +2,46 @@
 
 import { useEffect, useRef, useState } from "react";
 import type { FormEvent, ReactElement } from "react";
+import { useChat } from "@ai-sdk/react";
+import { DefaultChatTransport } from "ai";
+import type { UIMessage, TextUIPart } from "ai";
 import gsap from "gsap";
 
-interface ChatMessage {
-  id: string;
-  role: "user" | "bot";
-  text: string;
-  timestamp: string;
-}
+const transport = new DefaultChatTransport({ api: "/api/chat" });
 
-const INITIAL_MESSAGES: readonly ChatMessage[] = [
+const INITIAL_MESSAGES: UIMessage[] = [
   {
-    id: "m-1",
-    role: "bot",
-    text: "Good evening. How may I assist your experience with Adoness today?",
-    timestamp: "18:02",
-  },
-  {
-    id: "m-2",
-    role: "user",
-    text: "I'm looking for the Atelier collection's latest release dates.",
-    timestamp: "18:03",
-  },
-  {
-    id: "m-3",
-    role: "bot",
-    text: "The Atelier Spring/Summer collection is scheduled for early preview this Friday. Would you like to be added to the waitlist?",
-    timestamp: "18:03",
+    id: "greeting",
+    role: "assistant",
+    parts: [
+      {
+        type: "text",
+        text: "Welcome to Adoness — making luxury fabric-art statements. How may I help you explore our collections today?",
+      },
+    ],
   },
 ];
 
-function formatTime(): string {
-  return new Date().toLocaleTimeString([], {
-    hour: "2-digit",
-    minute: "2-digit",
-    hour12: false,
-  });
+function getMessageText(message: UIMessage): string {
+  const text = message.parts
+    .filter((part): part is TextUIPart => part.type === "text")
+    .map((part) => part.text)
+    .join("");
+  const marker = text.indexOf("LEAD_CAPTURED::");
+  return (marker >= 0 ? text.slice(0, marker) : text).trim();
 }
 
 export function Chatbot(): ReactElement {
   const [open, setOpen] = useState<boolean>(false);
-  const [messages, setMessages] = useState<ChatMessage[]>([
-    ...INITIAL_MESSAGES,
-  ]);
   const [input, setInput] = useState<string>("");
-  const [sending, setSending] = useState<boolean>(false);
+
+  const { messages, sendMessage, status, error } = useChat({
+    transport,
+    messages: INITIAL_MESSAGES,
+  });
+
+  const sending = status === "submitted" || status === "streaming";
+  const awaitingReply = status === "submitted";
 
   const containerRef = useRef<HTMLDivElement>(null);
   const tlRef = useRef<gsap.core.Timeline | null>(null);
@@ -74,21 +69,13 @@ export function Chatbot(): ReactElement {
         y: 0,
         duration: 0.45,
       })
-        .to(
-          ".chat-header",
-          { autoAlpha: 1, y: 0, duration: 0.35 },
-          "-=0.2"
-        )
+        .to(".chat-header", { autoAlpha: 1, y: 0, duration: 0.35 }, "-=0.2")
         .to(
           ".chat-message",
           { autoAlpha: 1, y: 0, duration: 0.4, stagger: 0.07 },
           "-=0.25"
         )
-        .to(
-          ".chat-input-bar",
-          { autoAlpha: 1, y: 0, duration: 0.35 },
-          "-=0.3"
-        );
+        .to(".chat-input-bar", { autoAlpha: 1, y: 0, duration: 0.35 }, "-=0.3");
 
       tlRef.current = tl;
     }, containerRef);
@@ -106,7 +93,7 @@ export function Chatbot(): ReactElement {
     const el = messagesRef.current;
     if (!el || !open) return;
     el.scrollTo({ top: el.scrollHeight, behavior: "smooth" });
-  }, [messages, open, sending]);
+  }, [messages, open, status]);
 
   useEffect(() => {
     if (!open) return undefined;
@@ -117,34 +104,12 @@ export function Chatbot(): ReactElement {
     return () => window.removeEventListener("keydown", onKey);
   }, [open]);
 
-  const handleSend = async (
-    event: FormEvent<HTMLFormElement>
-  ): Promise<void> => {
+  const handleSend = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
     const text = input.trim();
     if (!text || sending) return;
-
-    const userMessage: ChatMessage = {
-      id: `u-${Date.now()}`,
-      role: "user",
-      text,
-      timestamp: formatTime(),
-    };
-    setMessages((prev) => [...prev, userMessage]);
     setInput("");
-    setSending(true);
-
-    // Placeholder for the n8n webhook call; swap with the real request when ready.
-    await new Promise((resolve) => setTimeout(resolve, 900));
-
-    const botReply: ChatMessage = {
-      id: `b-${Date.now()}`,
-      role: "bot",
-      text: "Thank you — a stylist will follow up shortly with curated details.",
-      timestamp: formatTime(),
-    };
-    setMessages((prev) => [...prev, botReply]);
-    setSending(false);
+    void sendMessage({ text });
   };
 
   return (
@@ -182,10 +147,23 @@ export function Chatbot(): ReactElement {
           ref={messagesRef}
           className="flex max-h-[420px] min-h-[280px] flex-col gap-4 overflow-y-auto scroll-smooth px-5 py-5"
         >
-          {messages.map((message) => (
-            <ChatBubble key={message.id} message={message} />
-          ))}
-          {sending ? <TypingBubble /> : null}
+          {messages.map((message) => {
+            const text = getMessageText(message);
+            if (text.length === 0) return null;
+            return (
+              <ChatBubble
+                key={message.id}
+                isUser={message.role === "user"}
+                text={text}
+              />
+            );
+          })}
+          {awaitingReply ? <TypingBubble /> : null}
+          {error ? (
+            <p className="self-start text-[11px] text-accent">
+              Something went wrong. Please try again.
+            </p>
+          ) : null}
         </div>
 
         <form
@@ -210,7 +188,7 @@ export function Chatbot(): ReactElement {
               aria-label={sending ? "Sending message" : "Send message"}
               aria-busy={sending}
               disabled={sending || input.trim().length === 0}
-              className="absolute right-1.5 flex h-10 w-10 items-center justify-center rounded-full bg-foreground text-background transition-colors hover:bg-accent disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:bg-foreground"
+              className="absolute right-1.5 flex h-10 w-10 items-center justify-center rounded-full bg-accent text-surface transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60"
             >
               {sending ? <Spinner /> : <SendIcon />}
             </button>
@@ -223,7 +201,7 @@ export function Chatbot(): ReactElement {
         aria-label={open ? "Close Adoness Assistant" : "Open Adoness Assistant"}
         aria-expanded={open}
         onClick={() => setOpen((value) => !value)}
-        className="relative flex h-14 w-14 items-center justify-center rounded-full bg-foreground text-background shadow-2xl transition-all duration-300 hover:scale-105 hover:bg-accent active:scale-95 md:h-16 md:w-16"
+        className="relative flex h-14 w-14 items-center justify-center rounded-full bg-accent text-surface shadow-2xl transition-all duration-300 hover:scale-105 hover:opacity-90 active:scale-95 md:h-16 md:w-16"
       >
         {!open && (
           <span
@@ -231,16 +209,19 @@ export function Chatbot(): ReactElement {
             className="absolute inset-0 animate-ping rounded-full bg-accent/30"
           />
         )}
-        <span className="relative">
-          {open ? <CloseIcon /> : <ChatIcon />}
-        </span>
+        <span className="relative">{open ? <CloseIcon /> : <ChatIcon />}</span>
       </button>
     </div>
   );
 }
 
-function ChatBubble({ message }: { message: ChatMessage }): ReactElement {
-  const isUser = message.role === "user";
+function ChatBubble({
+  isUser,
+  text,
+}: {
+  isUser: boolean;
+  text: string;
+}): ReactElement {
   return (
     <div
       className={`chat-message flex max-w-[85%] flex-col ${
@@ -254,14 +235,14 @@ function ChatBubble({ message }: { message: ChatMessage }): ReactElement {
             : "rounded-2xl rounded-tl-sm bg-muted/30 text-foreground"
         }`}
       >
-        {message.text}
+        {text}
       </div>
       <span
         className={`mt-1 text-[10px] uppercase tracking-[0.2em] text-foreground/40 ${
           isUser ? "mr-2" : "ml-2"
         }`}
       >
-        {isUser ? "You" : "Assistant"} · {message.timestamp}
+        {isUser ? "You" : "Assistant"}
       </span>
     </div>
   );
@@ -302,13 +283,7 @@ function Spinner(): ReactElement {
 
 function ChatIcon(): ReactElement {
   return (
-    <svg
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="currentColor"
-      aria-hidden
-    >
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
       <path d="M4 4h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H8l-4 4V6a2 2 0 0 1 2-2Z" />
     </svg>
   );

@@ -2,11 +2,10 @@
 
 import { useEffect, useRef } from "react";
 import type { ReactElement } from "react";
-import Image from "next/image";
-import logo from "@/public/assets/Screenshot (477).png"
 import gsap from "gsap";
 import { Container } from "@/components/ui/Container";
-
+import Image from "next/image";
+import logo from "@/public/logo.png"
 export function AboutHero(): ReactElement {
   const rootRef = useRef<HTMLElement>(null);
 
@@ -42,14 +41,7 @@ export function AboutHero(): ReactElement {
       <Container className="grid grid-cols-1 items-center gap-12 md:grid-cols-2 md:gap-16">
         <div className="relative order-1 md:order-1">
           <div className="about-hero-image relative aspect-[4/5] overflow-hidden rounded-2xl bg-surface shadow-[0_30px_70px_-25px_rgba(17,17,17,0.35)] md:aspect-[1.05/1] md:rounded-3xl">
-            <Image
-              src={logo}
-              alt="Adoness atelier — quiet workspace with natural light"
-              fill
-              priority
-              sizes="(max-width: 768px) 92vw, 50vw"
-              className="object-contain"
-            />
+            <Image src={logo} alt="" fill className="object-contain" />
           </div>
           <span
             aria-hidden
@@ -70,7 +62,7 @@ export function AboutHero(): ReactElement {
             Adoness Designs is a ‘FABRIC ART GALLERY’; an establishment whose mission is to design, create, showcase and sell luxury handcrafted fabric art items. 
           </p>
           <p className="about-hero-body max-w-xl text-sm leading-relaxed text-foreground/60 md:text-base">
-            At Adoness Fabric-art Gallery, we design, create, showcase and sell luxury handmade fabric works of art to beautify our customers and their space. What this means is that our products are made from high quality natural 'fabrics' both locally and internationally sourced; and their process of production is of superior construction which involves detailing, sustainability, human connection and high quality of craftsmanship.
+            At Adoness Fabric-art Gallery, we design, create, showcase and sell luxury handmade fabric works of art to beautify our customers and their space. What this means is that our products are made from high quality natural &lsquo;fabrics&rsquo; both locally and internationally sourced; and their process of production is of superior construction which involves detailing, sustainability, human connection and high quality of craftsmanship.
           </p>
         </div>
       </Container>

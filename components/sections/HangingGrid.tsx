@@ -25,13 +25,13 @@ const COLUMNS: readonly HangingColumn[] = [
   {
     items: [
       {
-        src: "https://picsum.photos/seed/adoness-1/400/520",
-        alt: "Editorial look 1",
+        src: "/adoness%20and%20works/image-1.jpeg",
+        alt: "Bidemi detailing a painted fabric canvas",
         aspect: "aspect-[3/4]",
       },
       {
-        src: "https://picsum.photos/seed/adoness-2/400/600",
-        alt: "Editorial look 2",
+        src: "/adoness%20and%20works/image-2.jpeg",
+        alt: "A patterned fabric-art piece in progress",
         aspect: "aspect-[3/4.5]",
       },
     ],
@@ -39,8 +39,8 @@ const COLUMNS: readonly HangingColumn[] = [
   {
     items: [
       {
-        src: "https://picsum.photos/seed/adoness-3/400/640",
-        alt: "Editorial look 3",
+        src: "/adoness%20and%20works/image-3.jpeg",
+        alt: "Hand-painting a geometric Ankara motif",
         aspect: "aspect-[3/5]",
       },
     ],
@@ -49,8 +49,8 @@ const COLUMNS: readonly HangingColumn[] = [
   {
     items: [
       {
-        src: "https://picsum.photos/seed/adoness-4/400/560",
-        alt: "Editorial look 4",
+        src: "/adoness%20and%20works/image-4.jpeg",
+        alt: "Fabric-art detail in the studio",
         aspect: "aspect-[3/4.2]",
       },
     ],
@@ -59,8 +59,8 @@ const COLUMNS: readonly HangingColumn[] = [
   {
     items: [
       {
-        src: "https://picsum.photos/seed/adoness-5/400/620",
-        alt: "Editorial look 5",
+        src: "/adoness%20and%20works/image-5.jpeg",
+        alt: "Layering colour onto handcrafted fabric",
         aspect: "aspect-[3/4.8]",
       },
     ],
@@ -69,8 +69,8 @@ const COLUMNS: readonly HangingColumn[] = [
   {
     items: [
       {
-        src: "https://picsum.photos/seed/adoness-6/400/580",
-        alt: "Editorial look 6",
+        src: "/adoness%20and%20works/image-6.jpeg",
+        alt: "Studio bags and fabric-art pieces on display",
         aspect: "aspect-[3/4.4]",
       },
     ],
@@ -79,8 +79,8 @@ const COLUMNS: readonly HangingColumn[] = [
   {
     items: [
       {
-        src: "https://picsum.photos/seed/adoness-7/400/600",
-        alt: "Editorial look 7",
+        src: "/adoness%20and%20works/image-7.jpeg",
+        alt: "Painting lettering onto fabric",
         aspect: "aspect-[3/4.6]",
       },
     ],
@@ -89,13 +89,13 @@ const COLUMNS: readonly HangingColumn[] = [
   {
     items: [
       {
-        src: "https://picsum.photos/seed/adoness-8/400/540",
-        alt: "Editorial look 8",
+        src: "/adoness%20and%20works/image-8.jpeg",
+        alt: "Finished fabric-art detail",
         aspect: "aspect-[3/4.2]",
       },
       {
-        src: "https://picsum.photos/seed/adoness-9/400/520",
-        alt: "Editorial look 9",
+        src: "/adoness%20and%20works/image-1.jpeg",
+        alt: "Bidemi at work in the Adoness studio",
         aspect: "aspect-[3/4]",
       },
     ],
@@ -103,8 +103,8 @@ const COLUMNS: readonly HangingColumn[] = [
   {
     items: [
       {
-        src: "https://picsum.photos/seed/adoness-10/400/680",
-        alt: "Editorial look 10",
+        src: "/adoness%20and%20works/image-3.jpeg",
+        alt: "Detailing an Ankara-inspired pattern",
         aspect: "aspect-[3/5.2]",
       },
     ],
@@ -143,6 +143,21 @@ export function HangingGrid(): ReactElement {
         },
         "-=0.25"
       );
+
+      // Alternating parallax — odd columns drift up, even columns drift down.
+      const columns = gsap.utils.toArray<HTMLElement>(".hanging-col");
+      columns.forEach((column, index) => {
+        gsap.to(column, {
+          yPercent: index % 2 === 0 ? -6 : 6,
+          ease: "none",
+          scrollTrigger: {
+            trigger: rootRef.current,
+            start: "top bottom",
+            end: "bottom top",
+            scrub: 0.6,
+          },
+        });
+      });
     }, rootRef);
     return () => ctx.revert();
   }, []);
@@ -156,7 +171,7 @@ export function HangingGrid(): ReactElement {
         {COLUMNS.map((column, columnIndex) => (
           <div
             key={columnIndex}
-            className={`relative flex flex-col gap-4 ${column.offsetClass ?? ""} ${
+            className={`hanging-col relative flex flex-col gap-4 ${column.offsetClass ?? ""} ${
               column.hideBelowLg ? "hidden lg:flex" : ""
             }`.trim()}
           >

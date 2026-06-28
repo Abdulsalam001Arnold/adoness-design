@@ -53,7 +53,7 @@ export function AboutCTA(): ReactElement {
         </h2>
         <Link
           href="/collections"
-          className="cta-button mt-12 inline-flex items-center justify-center rounded-full bg-foreground px-12 py-5 text-[12px] font-semibold uppercase tracking-[0.2em] text-background shadow-md transition-colors duration-300 hover:bg-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+          className="cta-button mt-12 inline-flex items-center justify-center rounded-full bg-accent px-12 py-5 text-[12px] font-semibold uppercase tracking-[0.2em] text-surface shadow-md transition-all duration-300 hover:scale-[1.03] hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
         >
           View Collections
         </Link>

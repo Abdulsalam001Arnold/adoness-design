@@ -37,17 +37,17 @@ export function CategoryCTA(): ReactElement {
   return (
     <section ref={rootRef} className="py-20 md:py-28">
       <Container>
-        <div className="cta-card flex flex-col items-center rounded-3xl bg-foreground px-8 py-16 text-center text-background md:px-16 md:py-24">
+        <div className="cta-card flex flex-col items-center rounded-3xl bg-accent px-8 py-16 text-center text-surface md:px-16 md:py-24">
           <h2 className="cta-text-title max-w-2xl font-serif text-3xl font-semibold leading-tight md:text-5xl md:leading-[1.1]">
             Made to Measure
           </h2>
-          <p className="cta-text-body mt-6 max-w-xl text-base leading-relaxed text-background/70 md:mt-8 md:text-lg">
+          <p className="cta-text-body mt-6 max-w-xl text-base leading-relaxed text-surface/80 md:mt-8 md:text-lg">
             Discover the pinnacle of our craftsmanship through our bespoke
             atelier services — available by private appointment only.
           </p>
           <Link
             href="/contact"
-            className="cta-text-button mt-10 inline-flex items-center justify-center rounded-full bg-background px-10 py-4 text-[12px] font-semibold uppercase tracking-[0.25em] text-foreground transition-colors hover:bg-accent hover:text-background focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+            className="cta-text-button mt-10 inline-flex items-center justify-center rounded-full bg-surface px-10 py-4 text-[12px] font-semibold uppercase tracking-[0.25em] text-accent transition-colors hover:bg-foreground hover:text-surface focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-background"
           >
             Inquire Atelier
           </Link>

@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import type { ReactElement } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import gsap from "gsap";
 
@@ -104,7 +105,7 @@ export function Navbar(): ReactElement {
 
   return (
     <>
-      <header className="fixed inset-x-0 top-0 z-50 bg-background/85 backdrop-blur-md">
+      <header className="fixed inset-x-0 top-0 z-50 border-b border-muted/30 bg-background/85 backdrop-blur-md">
         <nav className="mx-auto flex w-full max-w-screen-2xl items-center justify-between px-6 py-5 sm:px-10 md:py-6">
           <ul className="hidden flex-1 items-center gap-8 md:flex lg:gap-10">
             {NAV_LINKS.map((link) => {
@@ -132,12 +133,15 @@ export function Navbar(): ReactElement {
           </ul>
 
           <div className="flex flex-1 justify-start md:justify-center">
-            <Link
-              href="/"
-              className="font-serif text-2xl font-bold tracking-[0.2em] text-foreground md:text-[28px]"
-              aria-label="Adoness — home"
-            >
-              ADONESS
+            <Link href="/" aria-label="Adoness — home" className="inline-block">
+              <Image
+                src="/logo.png"
+                alt="Adoness"
+                width={120}
+                height={51}
+                priority
+                className="h-9 w-auto md:h-11"
+              />
             </Link>
           </div>
 
@@ -187,9 +191,13 @@ export function Navbar(): ReactElement {
         >
           <div className="flex h-full flex-col bg-background px-8 py-8">
             <div className="mobile-menu-header flex items-center justify-between">
-              <span className="font-serif text-xl font-bold tracking-[0.2em] text-foreground">
-                ADONESS
-              </span>
+              <Image
+                src="/logo.png"
+                alt="Adoness"
+                width={104}
+                height={44}
+                className="h-8 w-auto"
+              />
               <button
                 type="button"
                 aria-label="Close menu"

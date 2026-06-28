@@ -2,18 +2,20 @@
 
 import { useEffect, useRef } from "react";
 import type { ReactElement } from "react";
-import Image from "next/image";
+import Image, { StaticImageData } from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Container } from "@/components/ui/Container";
-
+import image1 from '@/public/posters/88b2af5ac586485c9f180b895cd3971f.webp'
+import image2 from '@/public/posters/e82f557e08df3eaa21dc801c41133ee9.webp'
+import image3 from '@/public/posters/098c90a0e5d7b19182c3763239c3cea5.webp'
 gsap.registerPlugin(ScrollTrigger);
 
 interface EditorialCard {
   tag: string;
   title: string;
   body: string;
-  image: string;
+  image: string | StaticImageData;
   aspect: string;
   translateClass: string;
 }
@@ -23,7 +25,7 @@ const CARDS: readonly EditorialCard[] = [
     tag: "Editorial · 01",
     title: "The Modern Aesthetic",
     body: "A curated selection of timeless silhouettes designed for the contemporary individual who values substance and form.",
-    image: "https://picsum.photos/seed/adoness-editorial-1/640/800",
+    image: image2,
     aspect: "aspect-[4/5]",
     translateClass: "md:translate-y-12",
   },
@@ -31,7 +33,7 @@ const CARDS: readonly EditorialCard[] = [
     tag: "Craft · 02",
     title: "Artisanal Details",
     body: "Every piece in our atelier is a testament to the enduring beauty of handcrafted excellence and mindful production.",
-    image: "https://picsum.photos/seed/adoness-editorial-2/640/640",
+    image: image3,
     aspect: "aspect-square",
     translateClass: "",
   },
@@ -39,7 +41,7 @@ const CARDS: readonly EditorialCard[] = [
     tag: "Vision · 03",
     title: "Bold Simplicity",
     body: "Exploring the intersection of architectural structure and fluid movement through our latest seasonal collection.",
-    image: "https://picsum.photos/seed/adoness-editorial-3/640/800",
+    image: image1,
     aspect: "aspect-[4/5]",
     translateClass: "md:-translate-y-12",
   },

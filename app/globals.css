@@ -4,21 +4,51 @@
   --color-background: #faf6f1;
   --color-foreground: #111111;
   --color-muted: #c8c0b8;
-  --color-accent: #a0866a;
+
+  /* Pink is the PRIMARY brand colour — buttons, badges, highlights, hover.
+     The `accent` token maps to pink so existing accent utilities re-skin. */
+  --color-accent: #ff1694;
+  --color-accent-warm: #a0866a;
+
   --color-surface: #ffffff;
+  --color-pink-tint: #fff0f7;
+
+  /* Decorative Ankara accents only — never core UI */
+  --color-ankara-teal: #00a896;
+  --color-ankara-orange: #f47c26;
 
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
-  --font-serif: var(--font-noto-serif), ui-serif, Georgia, serif;
+  --font-serif: var(--font-playfair), ui-serif, Georgia, serif;
 }
 
+/* Subtle dot texture (legacy) */
 @utility dot-grid {
   background-image: radial-gradient(var(--color-muted) 1px, transparent 1px);
   background-size: 32px 32px;
 }
 
-html,
-body {
+/* Ankara-inspired diamond/dot texture for hero + feature backgrounds.
+   Muted at low opacity — subtle, never overwhelming. */
+@utility ankara-pattern {
+  background-image:
+    radial-gradient(var(--color-muted) 1.5px, transparent 1.5px),
+    radial-gradient(var(--color-accent) 1px, transparent 1px);
+  background-size: 44px 44px, 44px 44px;
+  background-position: 0 0, 22px 22px;
+}
+
+/* Warm pink-tinted section background to alternate with cream */
+@utility bg-pink-tint {
+  background-color: var(--color-pink-tint);
+}
+
+html {
+  /* Fallback under the animated field (AnimatedBackground.tsx). Body is kept
+     transparent so the fixed pink field shows through on every page. */
   background-color: var(--color-background);
+}
+
+body {
   color: var(--color-foreground);
 }
 
@@ -30,5 +60,59 @@ body {
 
 ::selection {
   background-color: var(--color-accent);
-  color: var(--color-background);
+  color: var(--color-surface);
+}
+
+/* ───────── Living brand background ─────────
+   Soft pink + cream blobs that slowly drift behind all page content, so the
+   site never reads as flat white. Pure CSS; paused under reduced-motion. */
+@keyframes blob-a {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  33% {
+    transform: translate3d(8%, -6%, 0) scale(1.12);
+  }
+  66% {
+    transform: translate3d(-6%, 7%, 0) scale(0.92);
+  }
+}
+@keyframes blob-b {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(-9%, 6%, 0) scale(1.15);
+  }
+}
+@keyframes blob-c {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  40% {
+    transform: translate3d(7%, -5%, 0) scale(1.1);
+  }
+  75% {
+    transform: translate3d(-5%, -3%, 0) scale(0.96);
+  }
+}
+
+/* Seamless horizontal swipe for the studio image marquee. */
+@keyframes marquee-x {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .brand-blob,
+  .marquee-track {
+    animation: none !important;
+  }
 }

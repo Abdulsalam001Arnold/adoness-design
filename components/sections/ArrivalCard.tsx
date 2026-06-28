@@ -1,5 +1,9 @@
+"use client";
+
+import { useEffect, useRef } from "react";
 import type { ReactElement } from "react";
 import Image from "next/image";
+import gsap from "gsap";
 import type { ArrivalItem } from "@/types/arrival";
 
 interface ArrivalCardProps {
@@ -17,9 +21,48 @@ export function ArrivalCard({
 }: ArrivalCardProps): ReactElement {
   const isFeature = variant === "feature";
   const aspect = isFeature ? "aspect-[16/9]" : "aspect-[4/5]";
+  const rootRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const el = rootRef.current;
+    if (!el) return undefined;
+    if (window.matchMedia("(hover: none)").matches) return undefined;
+    const image = el.querySelector<HTMLElement>(".arrival-card-image");
+
+    const enter = (): void => {
+      gsap.to(el, { y: -6, duration: 0.4, ease: "power3.out", overwrite: "auto" });
+      if (image) {
+        gsap.to(image, {
+          scale: 1.06,
+          duration: 0.6,
+          ease: "power3.out",
+          overwrite: "auto",
+        });
+      }
+    };
+    const leave = (): void => {
+      gsap.to(el, { y: 0, duration: 0.4, ease: "power3.out", overwrite: "auto" });
+      if (image) {
+        gsap.to(image, {
+          scale: 1,
+          duration: 0.6,
+          ease: "power3.out",
+          overwrite: "auto",
+        });
+      }
+    };
+
+    el.addEventListener("pointerenter", enter);
+    el.addEventListener("pointerleave", leave);
+    return () => {
+      el.removeEventListener("pointerenter", enter);
+      el.removeEventListener("pointerleave", leave);
+      gsap.killTweensOf([el, image].filter(Boolean) as Element[]);
+    };
+  }, []);
 
   return (
-    <article className="arrival-card group">
+    <article ref={rootRef} className="arrival-card group">
       <div
         className={`relative overflow-hidden rounded-2xl bg-surface shadow-[0_18px_40px_-22px_rgba(17,17,17,0.25)] transition-shadow duration-500 group-hover:shadow-[0_28px_60px_-25px_rgba(17,17,17,0.4)] ${aspect}`}
       >
@@ -32,9 +75,9 @@ export function ArrivalCard({
               ? "(max-width: 1024px) 92vw, 66vw"
               : "(max-width: 640px) 92vw, (max-width: 1024px) 45vw, 30vw"
           }
-          className="object-cover transition-transform duration-[900ms] ease-out group-hover:scale-[1.05]"
+          className="arrival-card-image object-cover"
         />
-        <span className="absolute left-4 top-4 rounded-full bg-foreground px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.25em] text-background md:left-6 md:top-6">
+        <span className="absolute left-4 top-4 rounded-full bg-accent px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.25em] text-surface md:left-6 md:top-6">
           New
         </span>
       </div>
@@ -54,7 +97,7 @@ export function ArrivalCard({
               {item.category}
             </span>
           </div>
-          <span className="font-serif text-2xl font-semibold text-foreground md:text-3xl">
+          <span className="font-serif text-2xl font-semibold text-accent md:text-3xl">
             {formatPrice(item.price)}
           </span>
         </div>
@@ -67,7 +110,7 @@ export function ArrivalCard({
             <span className="text-[11px] font-semibold uppercase tracking-[0.2em] text-foreground/50">
               {item.category}
             </span>
-            <span className="text-sm font-semibold text-foreground">
+            <span className="text-sm font-semibold text-accent">
               {formatPrice(item.price)}
             </span>
           </div>
@@ -76,7 +119,7 @@ export function ArrivalCard({
 
       <button
         type="button"
-        className="mt-5 w-full rounded-full bg-foreground py-3.5 text-[11px] font-semibold uppercase tracking-[0.25em] text-background transition-colors hover:bg-accent md:hidden"
+        className="mt-5 w-full rounded-full bg-accent py-3.5 text-[11px] font-semibold uppercase tracking-[0.25em] text-surface transition-opacity hover:opacity-90 md:hidden"
       >
         Add to Bag
       </button>

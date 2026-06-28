@@ -38,6 +38,7 @@ NOT generic Western e-commerce. NOT loud or chaotic. Culturally rich but premium
 - Pink (#FF1694) brush strokes separating major sections
 - Animate with GSAP SVG path draw on scroll enter
 - Keep them organic, hand-painted feel — not geometric
+- Can pick out posters in (public/posters)
 
 ### Background Patterns
 - Hero background: Ankara-inspired dot/diamond pattern (NOT plain dot grid)

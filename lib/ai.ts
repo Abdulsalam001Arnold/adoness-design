@@ -3,9 +3,11 @@ import { createOpenAI } from "@ai-sdk/openai";
 
 
 export const aiAgent = createOpenAI({
-    apiKey: process.env.OPENAI_API_KEY!
-})
+    apiKey: process.env.OPENAI_API_KEY!,
+});
 
+// Fast, cost-effective model for the conversational assistant.
+export const chatModel = aiAgent("gpt-4o-mini");
 
 export const ADONESS_SYSTEM_PROMPT = `
 # Role & Brand Identity

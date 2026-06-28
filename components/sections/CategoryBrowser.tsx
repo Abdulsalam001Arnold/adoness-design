@@ -113,14 +113,14 @@ export function CategoryBrowser(): ReactElement {
                   onClick={() => setCategory(tab)}
                   className={`relative shrink-0 whitespace-nowrap pb-3 pt-1 text-[11px] font-semibold uppercase tracking-[0.25em] transition-colors duration-300 ${
                     isActive
-                      ? "text-foreground"
+                      ? "text-accent"
                       : "text-foreground/45 hover:text-foreground"
                   }`}
                 >
                   <span>{tab}</span>
                   <span
                     aria-hidden
-                    className={`absolute -bottom-[21px] left-0 h-[2px] w-full origin-left bg-foreground transition-transform duration-300 ${
+                    className={`absolute -bottom-[21px] left-0 h-[2px] w-full origin-left bg-accent transition-transform duration-300 ${
                       isActive ? "scale-x-100" : "scale-x-0"
                     }`}
                   />
@@ -141,7 +141,7 @@ export function CategoryBrowser(): ReactElement {
             <FilterIcon />
             Refine
             {activeCount > 0 ? (
-              <span className="ml-1 inline-flex h-5 min-w-5 items-center justify-center rounded-full bg-foreground px-1.5 text-[10px] tracking-normal text-background">
+              <span className="ml-1 inline-flex h-5 min-w-5 items-center justify-center rounded-full bg-accent px-1.5 text-[10px] tracking-normal text-surface">
                 {activeCount}
               </span>
             ) : null}
@@ -236,7 +236,7 @@ function RefineRows({
                 aria-pressed={active}
                 className={`min-w-11 rounded-full border px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.2em] transition-all duration-200 ${
                   active
-                    ? "border-foreground bg-foreground text-background"
+                    ? "border-accent bg-accent text-surface"
                     : "border-foreground/25 bg-background text-foreground hover:border-foreground/60"
                 }`}
               >
@@ -344,7 +344,7 @@ function EmptyState({ onReset }: { onReset: () => void }): ReactElement {
       <button
         type="button"
         onClick={onReset}
-        className="rounded-full bg-foreground px-8 py-3 text-[11px] font-semibold uppercase tracking-[0.25em] text-background transition-colors hover:bg-accent"
+        className="rounded-full bg-accent px-8 py-3 text-[11px] font-semibold uppercase tracking-[0.25em] text-surface transition-opacity hover:opacity-90"
       >
         Clear filters
       </button>
