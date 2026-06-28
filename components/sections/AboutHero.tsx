@@ -3,7 +3,7 @@
 import { useEffect, useRef } from "react";
 import type { ReactElement } from "react";
 import Image from "next/image";
-
+import logo from "@/public/assets/Screenshot (477).png"
 import gsap from "gsap";
 import { Container } from "@/components/ui/Container";
 
@@ -43,12 +43,12 @@ export function AboutHero(): ReactElement {
         <div className="relative order-1 md:order-1">
           <div className="about-hero-image relative aspect-[4/5] overflow-hidden rounded-2xl bg-surface shadow-[0_30px_70px_-25px_rgba(17,17,17,0.35)] md:aspect-[1.05/1] md:rounded-3xl">
             <Image
-              src="https://picsum.photos/seed/adoness-about-hero/900/1100"
+              src={logo}
               alt="Adoness atelier — quiet workspace with natural light"
               fill
               priority
               sizes="(max-width: 768px) 92vw, 50vw"
-              className="object-cover"
+              className="object-contain"
             />
           </div>
           <span
