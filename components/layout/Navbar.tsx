@@ -35,7 +35,7 @@ export function Navbar(): ReactElement {
   useEffect(() => {
     const ctx = gsap.context(() => {
       gsap.set(".mobile-menu-backdrop", { autoAlpha: 0 });
-      gsap.set(".mobile-menu-drawer", { xPercent: -100 });
+      gsap.set(".mobile-menu-drawer", { xPercent: -100, autoAlpha: 0 });
       gsap.set(".mobile-menu-header", { autoAlpha: 0, y: -8 });
       gsap.set(".mobile-menu-link", { x: -28, autoAlpha: 0 });
       gsap.set(".mobile-menu-footer", { autoAlpha: 0, y: 16 });
@@ -48,7 +48,7 @@ export function Navbar(): ReactElement {
       tl.to(".mobile-menu-backdrop", { autoAlpha: 1, duration: 0.45 })
         .to(
           ".mobile-menu-drawer",
-          { xPercent: 0, duration: 0.6, ease: "power4.out" },
+          { xPercent: 0, autoAlpha: 1, duration: 0.6, ease: "power4.out" },
           "<"
         )
         .to(
@@ -180,14 +180,14 @@ export function Navbar(): ReactElement {
           aria-label="Close menu"
           tabIndex={open ? 0 : -1}
           onClick={() => setOpen(false)}
-          className="mobile-menu-backdrop fixed inset-0 z-[120] cursor-default bg-foreground/45 backdrop-blur-sm"
+          className="mobile-menu-backdrop invisible fixed inset-0 z-[120] cursor-default bg-foreground/45 opacity-0 backdrop-blur-sm"
         />
 
         <aside
           id="mobile-menu-drawer"
           aria-label="Mobile navigation"
           aria-hidden={!open}
-          className="mobile-menu-drawer fixed inset-y-0 left-0 z-[130] flex w-[85%] max-w-[360px] flex-col bg-background shadow-[0_0_60px_rgba(17,17,17,0.18)]"
+          className="mobile-menu-drawer invisible fixed inset-y-0 left-0 z-[130] flex w-[85%] max-w-[360px] flex-col bg-background opacity-0 shadow-[0_0_60px_rgba(17,17,17,0.18)]"
         >
           <div className="flex h-full flex-col bg-background px-8 py-8">
             <div className="mobile-menu-header flex items-center justify-between">

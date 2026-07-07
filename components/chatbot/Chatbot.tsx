@@ -115,13 +115,13 @@ export function Chatbot(): ReactElement {
   return (
     <div
       ref={containerRef}
-      className="fixed bottom-6 right-6 z-[100] flex flex-col items-end gap-4 md:bottom-8 md:right-8"
+      className="pointer-events-none fixed bottom-6 right-6 z-[100] flex flex-col items-end gap-4 md:bottom-8 md:right-8"
     >
       <div
         role="dialog"
         aria-label="Adoness Assistant"
         aria-hidden={!open}
-        className="chat-modal invisible flex w-[min(92vw,400px)] flex-col overflow-hidden rounded-2xl border border-muted/30 bg-background opacity-0 shadow-[0_24px_60px_-15px_rgba(17,17,17,0.35)]"
+        className="chat-modal pointer-events-auto invisible flex w-[min(92vw,400px)] flex-col overflow-hidden rounded-2xl border border-muted/30 bg-background opacity-0 shadow-[0_24px_60px_-15px_rgba(17,17,17,0.35)]"
       >
         <div className="chat-header flex items-center justify-between bg-foreground px-5 py-4 text-background">
           <div className="flex items-center gap-3">
@@ -201,7 +201,7 @@ export function Chatbot(): ReactElement {
         aria-label={open ? "Close Adoness Assistant" : "Open Adoness Assistant"}
         aria-expanded={open}
         onClick={() => setOpen((value) => !value)}
-        className="relative flex h-14 w-14 items-center justify-center rounded-full bg-accent text-surface shadow-2xl transition-all duration-300 hover:scale-105 hover:opacity-90 active:scale-95 md:h-16 md:w-16"
+        className="pointer-events-auto relative flex h-14 w-14 items-center justify-center rounded-full bg-accent text-surface shadow-2xl transition-all duration-300 hover:scale-105 hover:opacity-90 active:scale-95 md:h-16 md:w-16"
       >
         {!open && (
           <span
