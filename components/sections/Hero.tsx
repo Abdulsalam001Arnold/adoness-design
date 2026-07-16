@@ -129,14 +129,13 @@ export function Hero(): ReactElement {
         <h1 className="max-w-4xl font-serif text-4xl font-bold leading-[1.05] tracking-[-0.02em] text-foreground sm:text-5xl md:text-6xl lg:text-[78px]">
           <span className="hero-line block">Luxury fabric-art</span>
           <span className="hero-line block">
-            statements, <span className="text-accent">made</span>
+            statements, <span className="text-accent">Threads Untamed.</span>
           </span>
-          <span className="hero-line block">to be worn.</span>
+          <span className="hero-line block">Art Unleashed.</span>
         </h1>
 
         <p className="hero-subtext mt-8 max-w-xl text-base leading-relaxed text-foreground/70 md:text-lg">
-          Premium Afrocentric fashion where handcrafted Ankara artistry meets
-          modern editorial elegance — designed by Bidemi Odusi.
+          Premium afrocentric pieces where handcrafted fabric artistry meets culture and elegance to produce masterpieces.
         </p>
 
         <div className="hero-cta mt-10 flex flex-wrap items-center justify-center gap-4">

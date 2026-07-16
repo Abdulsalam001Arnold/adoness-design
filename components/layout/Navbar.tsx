@@ -206,13 +206,7 @@ export function Navbar(): ReactElement {
         >
           <div className="flex h-full flex-col bg-background px-8 py-8">
             <div className="mobile-menu-header flex items-center justify-between">
-              <Image
-                src="/logo.png"
-                alt="Adoness"
-                width={104}
-                height={44}
-                className="h-8 w-auto"
-              />
+              <img src="/logo.png" alt="Adoness" className="h-50 w-50" />
               <button
                 type="button"
                 aria-label="Close menu"
