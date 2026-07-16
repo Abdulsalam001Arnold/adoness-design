@@ -21,6 +21,50 @@
   --font-serif: var(--font-playfair), ui-serif, Georgia, serif;
 }
 
+/* ───────── Theme tokens ─────────
+   Light is the default brand theme. Dark flips the core surface/text tokens to
+   black/white while keeping the pink accent. Toggled via `data-theme` on <html>
+   (see hooks/useTheme.ts + the pre-paint script in layout.tsx). Every utility
+   references these vars, so the whole app re-skins with no per-component work. */
+:root {
+  --bg-field-base: #ffe6f3;
+  --bg-blob-pink: rgba(255, 22, 148, 0.22);
+  --bg-blob-white: rgba(255, 255, 255, 0.85);
+  --bg-ring: rgba(255, 22, 148, 0.42);
+  --overlay-scrim: rgba(17, 17, 17, 0.45);
+}
+
+:root[data-theme="dark"] {
+  --color-background: #0a0a0a;
+  --color-foreground: #f5f2ec;
+  --color-muted: #4a4441;
+  --color-surface: #161513;
+  --color-pink-tint: #1a0f15;
+  --color-accent-warm: #b89a7c;
+
+  --bg-field-base: #0a0a0a;
+  --bg-blob-pink: rgba(255, 22, 148, 0.16);
+  --bg-blob-white: rgba(255, 255, 255, 0.05);
+  --bg-ring: rgba(255, 22, 148, 0.22);
+  --overlay-scrim: rgba(0, 0, 0, 0.6);
+}
+
+/* Colour-only cross-fade when toggling themes — never touches layout. Does not
+   fire on first load (transitions ignore initial values). */
+@media (prefers-reduced-motion: no-preference) {
+  html,
+  body,
+  header,
+  aside,
+  footer,
+  main {
+    transition:
+      background-color 0.4s ease,
+      border-color 0.4s ease,
+      color 0.4s ease;
+  }
+}
+
 /* Subtle dot texture (legacy) */
 @utility dot-grid {
   background-image: radial-gradient(var(--color-muted) 1px, transparent 1px);
