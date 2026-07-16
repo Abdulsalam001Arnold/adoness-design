@@ -6,6 +6,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import gsap from "gsap";
+import { useTheme } from "@/hooks/useTheme";
 
 interface NavLink {
   label: string;
@@ -28,6 +29,7 @@ function isActivePath(pathname: string | null, href: string): boolean {
 
 export function Navbar(): ReactElement {
   const [open, setOpen] = useState(false);
+  const { theme, toggleTheme } = useTheme();
   const pathname = usePathname();
   const drawerRootRef = useRef<HTMLDivElement>(null);
   const tlRef = useRef<gsap.core.Timeline | null>(null);
@@ -148,6 +150,19 @@ export function Navbar(): ReactElement {
           <div className="flex flex-1 items-center justify-end gap-4 md:gap-6">
             <button
               type="button"
+              onClick={toggleTheme}
+              aria-label={
+                theme === "dark"
+                  ? "Switch to light theme"
+                  : "Switch to dark theme"
+              }
+              title={theme === "dark" ? "Light mode" : "Dark mode"}
+              className="text-foreground transition-colors duration-300 hover:text-accent"
+            >
+              {theme === "dark" ? <SunIcon /> : <MoonIcon />}
+            </button>
+            <button
+              type="button"
               aria-label="Search"
               className="text-foreground transition-colors duration-300 hover:text-accent"
             >
@@ -180,7 +195,7 @@ export function Navbar(): ReactElement {
           aria-label="Close menu"
           tabIndex={open ? 0 : -1}
           onClick={() => setOpen(false)}
-          className="mobile-menu-backdrop fixed inset-0 z-[120] cursor-default bg-foreground/45 backdrop-blur-sm"
+          className="mobile-menu-backdrop fixed inset-0 z-[120] cursor-default bg-[var(--overlay-scrim)] backdrop-blur-sm"
         />
 
         <aside
@@ -245,6 +260,50 @@ export function Navbar(): ReactElement {
         </aside>
       </div>
     </>
+  );
+}
+
+function MoonIcon(): ReactElement {
+  return (
+    <svg
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden
+    >
+      <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z" />
+    </svg>
+  );
+}
+
+function SunIcon(): ReactElement {
+  return (
+    <svg
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden
+    >
+      <circle cx="12" cy="12" r="4.5" />
+      <line x1="12" y1="2" x2="12" y2="4" />
+      <line x1="12" y1="20" x2="12" y2="22" />
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+      <line x1="2" y1="12" x2="4" y2="12" />
+      <line x1="20" y1="12" x2="22" y2="12" />
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+    </svg>
   );
 }
 
